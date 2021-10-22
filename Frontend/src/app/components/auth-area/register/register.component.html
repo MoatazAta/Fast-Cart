@@ -1,0 +1,42 @@
+<div class="box">
+
+    <h2>Register</h2>
+
+    <form [formGroup]="productForm" (submit)="register()">
+
+        <label>ID: </label>
+        <input type="text" [formControl]="idControl" (change)="changeOccurred()">
+        <span *ngIf="idControl.errors?.required && idControl.touched">Missing name</span>
+        <!-- <span *ngIf="idControl.errors?.pattern && idControl.touched">Name must be capitalized</span> -->
+
+        <label>Email: </label>
+        <input type="text" [formControl]="emailControl" (change)="changeOccurred()">
+        <span *ngIf="emailControl.invalid && emailControl.touched">Missing email</span>
+
+        <label>Password: </label>
+        <input type="password" [formControl]="passwordControl" (change)="changeOccurred()">
+        <span *ngIf="passwordControl.invalid && passwordControl.touched">Missing password</span>
+
+        <label>Confirm password: </label>
+        <input type="password" [formControl]="confirmPasswordControl" (change)="changeOccurred()">
+        <span *ngIf="confirmPasswordControl.invalid && confirmPasswordControl.touched">Missing password</span>
+
+        <label>city: </label>
+        <input type="text" [formControl]="cityControl" (change)="changeOccurred()">
+        <span *ngIf="cityControl.errors?.required && cityControl.touched">Missing city</span>
+
+        <label>street: </label>
+        <input type="text" [formControl]="streetControl" (change)="changeOccurred()">
+        <span *ngIf="streetControl.errors?.required && streetControl.touched">Missing street</span>
+
+        <label>First Name: </label>
+        <input type="text" [formControl]="firstNameControl" (change)="changeOccurred()">
+        <span *ngIf="firstNameControl.errors?.required && firstNameControl.touched">Missing first name</span>
+
+        <label>Last Name: </label>
+        <input type="text" [formControl]="lastNameControl" (change)="changeOccurred()">
+        <span *ngIf="lastNameControl.errors?.required && lastNameControl.touched">Missing last name</span>
+
+        <button>next</button>
+    </form>
+</div>
