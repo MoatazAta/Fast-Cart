@@ -5,31 +5,33 @@ const path = require("path");
 const uuid = require("uuid");
 const { deleteFile } = require("../helpers/file-helper");
 
-function getAllProductsAsync(){
-    return ProductModel.find().exec();
+function getAllProductsAsync() {
+    return ProductModel.find().populate("category").exec();
 }
 
-function getAllCategoriesAsync(){
+function getAllCategoriesAsync() {
     return CategoryModel.find().exec();
 }
 
-function getProductsByCategoryAsync(categoryId){
+function getProductsByCategoryAsync(categoryId) {
     return ProductModel.find({ categoryId }).exec();
 }
 
-function getOneProductAsync(productId){
+function getOneProductAsync(productId) {
     return ProductModel.find({ productId }).exec();
 }
 
-function addProductAsync(product,image){
+async function addProductAsync(product, image) {
     if (!image) return null;
     const extension = image.name.substr(image.name.lastIndexOf("."));
     const newImageName = uuid.v4() + extension;
     product.imageName = newImageName;
+    const fullPath = path.join("./images/", product.imageName);
+    await image.mv(fullPath);
     return product.save();
 }
 
-function deleteProductAsync(_id){
+function deleteProductAsync(_id) {
     return ProductModel.findByIdAndDelete(_id).exec();
 }
 
@@ -38,8 +40,7 @@ function deleteProductAsync(_id){
 async function updateProductAsync(product, newImage, currentImage) {
     if (!newImage) {
         product.imageName = currentImage;
-    }
-    else {
+    } else {
         let fullPath = path.join("./images/", currentImageName);
         deleteFile(fullPath);
         const extension = newImage.name.substr(newImage.name.lastIndexOf("."));

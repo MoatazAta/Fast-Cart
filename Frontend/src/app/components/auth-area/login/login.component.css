@@ -1,5 +1,5 @@
 form {
-	width: 250px;
+	width: 350px;
 }
 
 input {
@@ -9,7 +9,7 @@ input {
 }
 
 button {
-    width: 100%;
+    width:70%;
     margin: 10px 0 20px 0;
 }
 

@@ -1,16 +1,19 @@
 <div class="box">
 
-    <h2>Login</h2>
 
     <form (submit)="login()">
 
-        <label>Username: </label>
-        <input type="text" name="username" [(ngModel)]="credentials.username" />
+        <mat-form-field>
+            <mat-label>Username: </mat-label>
+            <input matInput type="text" name="username" [(ngModel)]="credentials.username" />
+        </mat-form-field>
 
-        <label>Password: </label>
-        <input type="password" name="password" [(ngModel)]="credentials.password" />
+        <mat-form-field>
+            <mat-label>Password: </mat-label>
+            <input matInput type="password" name="password" [(ngModel)]="credentials.password" />
+        </mat-form-field>
 
-        <button>Login</button>
+        <button mat-raised-button>Login</button>
 
     </form>
 

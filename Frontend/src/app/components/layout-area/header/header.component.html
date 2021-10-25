@@ -1,0 +1,42 @@
+<!-- <app-auth-menu></app-auth-menu>
+
+    <div>
+        <img src="../../../../assets/images/logo1.png" />
+        <h2>Fast Cart</h2>
+    </div>
+
+    <h2>Fast Cart</h2>
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+
+    <hr> -->
+<!-- <mat-toolbar>
+
+</mat-toolbar> -->
+
+<!-- <header class="site-header">
+    <div class="site-identity">
+      <a href="#"><img src="../../../../assets/images/logo1.png" /></a>
+      <h1>Fast Cart</h1>
+    </div>  
+    <nav class="site-navigation">
+      <ul class="nav">
+        <li><a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li> 
+        <li><app-auth-menu></app-auth-menu></li> 
+      </ul>
+    </nav>
+  </header> -->
+
+<mat-toolbar>
+    <div class="site-identity">
+        <a href="#"><img src="../../../../assets/images/logo1.png" /></a>
+        
+        <h1>Fast Cart</h1>
+    </div>
+    <div class="site-navigation">
+        <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <span> | </span>
+        <a routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Products</a>
+
+    </div>
+    <app-auth-menu></app-auth-menu>
+</mat-toolbar>

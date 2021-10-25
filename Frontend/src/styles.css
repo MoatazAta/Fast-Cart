@@ -1,13 +1,13 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
     text-align: center;
-    font-style: italic;
-    color: darkcyan;
-    background-image: linear-gradient(45deg, lightblue, white);
+    /* font-style: italic; */
+    /* color: darkcyan; */
+    background-image: linear-gradient(white);
 }
 
 a {
@@ -16,16 +16,10 @@ a {
 
 .box {
     display: inline-block;
-    text-align: left;
+    text-align: center;
     border: 1px solid black;
     padding: 0 10px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 3px;
     box-shadow: 5px 5px 10px;
-}
-
-.active {
-    color: green;
-    font-weight: bold;
-    font-family: Arial;
 }

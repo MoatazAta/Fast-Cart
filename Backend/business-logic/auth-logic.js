@@ -4,10 +4,10 @@ const UserModel = require("../models/user-model");
 const CredentialsModel = require("../models/credentials-model");
 
 
-function isEmailExistAsync(email) {
-    const email = UserModel.find({ email }).exec();
-    if (email.length > 0) return null;
-}
+// function isEmailExistAsync(email) {
+//     const email = UserModel.find({ email }).exec();
+//     if (email.length > 0) return null;
+// }
 
 function registerAsync(user) {
     user.password = cryptoHelper.hash(user.password);
@@ -28,7 +28,7 @@ function loginAsync(email , password) {
 }
 
 module.exports = {
-    isEmailExistAsync,
+    // isEmailExistAsync,
     registerAsync,
     loginAsync
 };

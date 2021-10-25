@@ -1,0 +1,49 @@
+/* body {
+    font-family: Helvetica;
+    margin: 0;
+} */
+
+
+/* 
+a {
+    text-decoration: none;
+} */
+
+.site-identity {
+    /* float: left; */
+    width: 90px;
+}
+
+.site-identity h1 {
+    font-size: 40px;
+    color: darkred;
+    margin: 0 0 0 0;
+    display: inline-block;
+}
+
+.site-identity img {
+    width: 100%;
+    margin: 0 5px 0 0;
+}
+
+.site-navigation {
+    margin: .3 0 .3em 0;
+    display: inline-block;
+}
+
+.site-navigation nav {
+    position: fixed;
+}
+
+.mat-toolbar {
+    display: grid;
+    grid-template-columns: 20% 50% 30%;
+    background-color: lightgreen;
+    position: sticky;
+    position: -webkit-sticky;
+    /* For macOS/iOS Safari */
+    top: 0;
+    /* Sets the sticky toolbar to be on top */
+    z-index: 1000;
+    /* Ensure that your app's content doesn't overlap the toolbar */
+}

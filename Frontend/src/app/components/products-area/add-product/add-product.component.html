@@ -1,0 +1,34 @@
+<div class="box">
+    <h2>Add product</h2>
+
+    <form (submit)="add()" #formInfo="ngForm">
+
+        <label>Category Name*</label><br>
+        <select name="categoryId" [(ngModel)]="product.categoryId" #categoryInfo="ngModel">
+            <option selected disabled value="">Select Category</option>
+            <option *ngFor="let c of categories" value={{c._id}}>{{c.name}}</option>
+        </select>
+        <span *ngIf="categoryInfo.errors?.required && categoryInfo.touched">Missing Category name</span>
+
+        <label>Name: </label>
+        <input type="text" name="name" [(ngModel)]="product.name" required pattern="^[A-Z].*$" #nameInfo="ngModel"
+            (change)="changeOccurred()">
+        <span *ngIf="nameInfo.errors?.required && nameInfo.touched">Missing name</span>
+        <span *ngIf="nameInfo.errors?.pattern && nameInfo.touched">Name must be capitalized</span>
+
+        <label>Price: </label>
+        <input type="number" step="0.01" name="price" [(ngModel)]="product.price" required min="0" #priceInfo="ngModel"
+            (change)="changeOccurred()">
+        <span *ngIf="priceInfo.errors?.required && priceInfo.touched">Missing price</span>
+        <span *ngIf="priceInfo.errors?.min && priceInfo.touched">please enter positive price</span>
+
+
+        <label>Image: </label>
+        <input type="file" accept="image/*" name="image" [(ngModel)]="product.imageName" required #imageInfo="ngModel" (change)="setImage($event); changeOccurred()">
+        <span *ngIf="imageInfo.invalid && imageInfo.touched">Missing image</span>
+
+        <button [disabled]="formInfo.form.invalid">Add</button>
+
+    </form>
+
+</div>

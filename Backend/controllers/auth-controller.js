@@ -31,8 +31,8 @@ router.post("/register", async (request, response) => {
         if(errors) return response.status(400).send(errors.message);
     
 
-        const isEmailExist = await logic.isEmailExistAsync(userToAdd.username);
-        if (isEmailExist === null) return response.status(400).send("email already used!");
+        // const isEmailExist = await logic.isEmailExistAsync(userToAdd.username);
+        // if (isEmailExist === null) return response.status(400).send("email already used!");
 
         const addedUser = await logic.registerAsync(userToAdd);
 
