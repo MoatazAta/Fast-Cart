@@ -5,6 +5,8 @@ export const environment = {
   productsUrl: baseUrl + "products/",
   categoriesUrl: baseUrl + "categories/",
   productImagesUrl: baseUrl + "products/images/",
+  cartsUrl: baseUrl + "carts/",
+  itemsUrl: baseUrl + "items/",
   registerUrl: baseUrl + "auth/register",
   loginUrl: baseUrl + "auth/login"
 };

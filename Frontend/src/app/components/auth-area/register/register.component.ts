@@ -44,7 +44,7 @@ export class RegisterComponent {
 
     public async register() {
         try {
-            this.user.id = this.idControl.value;
+            this.user._id = this.idControl.value;
             this.user.email = this.emailControl.value;
             this.user.password = this.passwordControl.value;
             this.user.city = this.cityControl.value;

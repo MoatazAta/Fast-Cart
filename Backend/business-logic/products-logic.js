@@ -10,7 +10,7 @@ function getAllProductsAsync() {
 }
 
 function getAllCategoriesAsync() {
-    return CategoryModel.find().exec();
+    return CategoryModel.find().exec(); 
 }
 
 function getProductsByCategoryAsync(categoryId) {

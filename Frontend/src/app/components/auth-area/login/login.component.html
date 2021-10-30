@@ -3,17 +3,13 @@
 
     <form (submit)="login()">
 
-        <mat-form-field>
-            <mat-label>Username: </mat-label>
-            <input matInput type="text" name="username" [(ngModel)]="credentials.username" />
-        </mat-form-field>
+            <label>Email: </label>
+            <input  type="text" name="username" [(ngModel)]="credentials.email" />
 
-        <mat-form-field>
-            <mat-label>Password: </mat-label>
-            <input matInput type="password" name="password" [(ngModel)]="credentials.password" />
-        </mat-form-field>
+            <label>Password: </label>
+            <input  type="password" name="password" [(ngModel)]="credentials.password" />
 
-        <button mat-raised-button>Login</button>
+        <button>Login</button>
 
     </form>
 

@@ -1,14 +1,33 @@
-<div>
+<div class="row">
+    <div class="col-md-2">
+        <div></div>
+    </div>
 
-    <a routerLink="/products/new">Add Product</a>
+    <div class="col-md-8">
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation" *ngFor="let c of categories">
+                <button class="nav-link" data-bs-toggle="tab" role="tab" aria-controls="home" aria-selected="true"
+                    value={{c._id}} (click)="showProducts($event)">{{c.name}}</button>
+            </li>
+        </ul>
 
-    <app-product-card *ngFor="let p of products" [product]="p"></app-product-card>
+        <!-- <a routerLink="/products/new">Add Product</a> -->
 
-</div>
+        <div class="row">
+            <div class="col-md-2" *ngFor="let p of products">
+                <app-product-card [product]="p" [user]="user" [cart]="cart" [cartItems]="items"></app-product-card>
+            </div>
+        </div>
+    </div>
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Status</div>
-    <div class="panel-body">
-        <h3>xxx</h3>
+    <div class="col">
+        <app-shopping-cart></app-shopping-cart>
     </div>
 </div>
+
+
+
+
+<!-- <div>
+    <app-shopping-cart></app-shopping-cart>
+</div> -->

@@ -30,6 +30,10 @@ export class ProductsService {
         return categories;
     }
 
+    public async getProductsByCategoryAsync(categoryId: string): Promise<ProductModel[]> {
+        const products = await this.http.get<ProductModel[]>(environment.productsUrl + "products-per-category/" + categoryId).toPromise();
+        return products;
+    }
     public async addProductAsync(product: ProductModel): Promise<ProductModel> {
 
         const myFormData = new FormData();
@@ -37,11 +41,9 @@ export class ProductsService {
         myFormData.append("name", product.name);
         myFormData.append("price", product.price.toString());
         myFormData.append("image", product.image.item(0));
-        console.log(product);
 
         const addedProduct = await this.http.post<ProductModel>(environment.productsUrl, myFormData).toPromise();
         store.dispatch({ type: ProductsActionType.ProductAdded, payload: addedProduct });
-        console.log(addedProduct);
         return addedProduct;
     }
 

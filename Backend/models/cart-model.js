@@ -2,11 +2,14 @@ const mongoose = require("mongoose");
 
 const CartSchema = mongoose.Schema({
 
-    userId: mongoose.Schema.Types.ObjectId,
-       
+    userId: String,
+
     date: Date,
 
-    isPaid: Number
+    isPaid: {
+        type: Boolean,
+        default: false
+    }
 
 }, { versionKey: false, toJSON: { virtuals: true }, id: false });
 

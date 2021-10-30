@@ -3,11 +3,11 @@ const ProductModel = require("../models/product-model");
 const ItemModel = require("../models/item-model");
 
 function getAllItemsAsync(){
-    return ItemModel.find().exec();
+    return ItemModel.find().populate(" product ").exec();
 }
-
-function getOneItemAsync(_id){
-    return ItemModel.find({ _id }).exec();
+ 
+function getItemsByCartIdAsync(cartId){
+    return ItemModel.find({ cartId }).populate("product").exec();
 }
 
 function addItemAsync(item){
@@ -24,7 +24,7 @@ function updateItemAsync(item){
 
 module.exports = {
     getAllItemsAsync,
-    getOneItemAsync,
+    getItemsByCartIdAsync,
     addItemAsync,
     deleteItemAsync,
     updateItemAsync

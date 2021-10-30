@@ -2,9 +2,14 @@ global.config = global.process.env.NODE_ENV === "production" ? require("./config
 require("./data-access-layer/dal"); // Connects Mongoose to MongoDB once
 const express = require("express");
 const cors = require("cors");
+const expressFileUpload = require("express-fileupload");
+
 const productsController = require("./controllers/products-controller");
 const authController = require("./controllers/auth-controller");
-const expressFileUpload = require("express-fileupload");
+const itemsController = require("./controllers/items-controller");
+const cartController = require("./controllers/cart-controller");
+
+
 const server = express();
 
 server.use(expressFileUpload());
@@ -13,6 +18,10 @@ server.use(cors());
 server.use(express.json());
 server.use("/api", productsController);
 server.use("/api/auth", authController);
+server.use("/api", itemsController);
+server.use("/api", cartController);
+
+
 
 server.listen(3001, () => console.log("Listening..."));
 

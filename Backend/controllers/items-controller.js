@@ -1,9 +1,9 @@
 const express = require("express");
 const logic = require("../business-logic/items-logic");
-const ProductModel = require("../models/product-model");
+const ProductModel = require("../models/product-model"); 
 const ItemModel = require("../models/item-model");
 const router = express.Router();
-
+ 
 router.get("/items", async (request, response) => {
     try {
         const items = await logic.getAllItemsAsync();
@@ -14,11 +14,11 @@ router.get("/items", async (request, response) => {
     }
 });
 
-router.get("/items/:_id", async (request, response) => {
+router.get("/items/cart/:_id", async (request, response) => {
     try {
         const _id = request.params._id;
-        const item = await logic.getOneItemAsync(_id);
-        response.json(item);
+        const items = await logic.getItemsByCartIdAsync(_id);
+        response.json(items);
     }
     catch(err) {
         response.status(500).send(err.message);
@@ -60,6 +60,18 @@ router.patch("/items/:_id", async (request, response) => {
         response.json(updatedItem);
     }
     catch(err) {
+        response.status(500).send(err.message);
+    }
+});
+
+
+router.delete("/items/:id", async(request, response) => {
+    try {
+        const id = request.params.id;
+        const deletedItem = await logic.deleteItemAsync(id);
+        if (!deletedItem) return response.status(404).send(`_id ${_id} not found`);
+        response.sendStatus(204);
+    } catch (err) {
         response.status(500).send(err.message);
     }
 });

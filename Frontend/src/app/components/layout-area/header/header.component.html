@@ -1,35 +1,7 @@
-<!-- <app-auth-menu></app-auth-menu>
-
-    <div>
-        <img src="../../../../assets/images/logo1.png" />
-        <h2>Fast Cart</h2>
-    </div>
-
-    <h2>Fast Cart</h2>
-    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-
-    <hr> -->
 <!-- <mat-toolbar>
-
-</mat-toolbar> -->
-
-<!-- <header class="site-header">
-    <div class="site-identity">
-      <a href="#"><img src="../../../../assets/images/logo1.png" /></a>
-      <h1>Fast Cart</h1>
-    </div>  
-    <nav class="site-navigation">
-      <ul class="nav">
-        <li><a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li> 
-        <li><app-auth-menu></app-auth-menu></li> 
-      </ul>
-    </nav>
-  </header> -->
-
-<mat-toolbar>
     <div class="site-identity">
         <a href="#"><img src="../../../../assets/images/logo1.png" /></a>
-        
+
         <h1>Fast Cart</h1>
     </div>
     <div class="site-navigation">
@@ -39,4 +11,38 @@
 
     </div>
     <app-auth-menu></app-auth-menu>
-</mat-toolbar>
+</mat-toolbar> -->
+<nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="../../../../assets/images/logo1.png" />
+            </a>
+            <a class="navbar-brand" routerLink="/home" routerLinkActive="active">Fast-Cart</a>
+
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/products" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">Products</a>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

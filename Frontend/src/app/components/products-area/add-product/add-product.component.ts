@@ -15,7 +15,6 @@ export class AddProductComponent implements OnInit {
 
     public product = new ProductModel();
     public categories: CategoryModel[];
-
     constructor(private myProductsService: ProductsService, private myRouter: Router, private notify: NotifyService) { }
 
     public changeOccurred() {
@@ -37,11 +36,10 @@ export class AddProductComponent implements OnInit {
  
     public async add() {
         try {
-            const x = await this.myProductsService.addProductAsync(this.product);
-            console.log("here1");
+            await this.myProductsService.addProductAsync(this.product);
             IncompleteGuard.canLeave = true;
             this.notify.success("Product added");
-            // this.myRouter.navigateByUrl("/products");
+            this.myRouter.navigateByUrl("/products");
         }
         catch (err: any) {
             this.notify.error(err);

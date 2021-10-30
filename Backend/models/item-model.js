@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+  
 const ItemSchema = mongoose.Schema({
 
     productId: mongoose.Schema.Types.ObjectId,
@@ -10,17 +10,17 @@ const ItemSchema = mongoose.Schema({
 
     cartId: mongoose.Schema.Types.ObjectId
 
-
+ 
 }, { versionKey: false, toJSON: { virtuals: true }, id: false });
 
-CartSchema.virtual("product", {
+ItemSchema.virtual("product", {
     ref: "ProductModel",
     localField: "productId",
     foreignField: "_id",
     justOne: true
 });
 
-CartSchema.virtual("cart", {
+ItemSchema.virtual("cart", {
     ref: "CartModel",
     localField: "cartId",
     foreignField: "_id",

@@ -25,6 +25,8 @@ import { ProductCardComponent } from './components/products-area/product-card/pr
 import { UpdateProductComponent } from './components/products-area/update-product/update-product.component';
 import { ShoppingCartComponent } from './components/cart-area/shopping-cart/shopping-cart.component';
 import { CartItemComponent } from './components/cart-area/cart-item/cart-item.component';
+import { FooterComponent } from './components/layout-area/footer/footer.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 
@@ -43,6 +45,7 @@ import { CartItemComponent } from './components/cart-area/cart-item/cart-item.co
         UpdateProductComponent,
         ShoppingCartComponent,
         CartItemComponent,
+        FooterComponent,
 
 
     ],
@@ -53,12 +56,8 @@ import { CartItemComponent } from './components/cart-area/cart-item/cart-item.co
         ReactiveFormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatToolbarModule
+        MDBBootstrapModule.forRoot()
+
     ],
     exports: [],
     // providers: [CalcService], // Create CalcService object for the entire app.

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
- 
+
 const UserSchema = mongoose.Schema({
-    _id :{
+    _id: {
         type: String,
         required: [true, "ID required"]
     },
@@ -17,7 +17,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: [true, "Email required"]
     },
-    password:{
+    password: {
         type: String,
         required: [true, "Password required"],
         minlength: [4, "Password must be minimum three chars."]
@@ -30,8 +30,11 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: [true, "Street required"]
     },
-    isAdmin: Number
-    
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
+
 }, { versionKey: false });
 
 const UserModel = mongoose.model("UserModel", UserSchema, "users");
