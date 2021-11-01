@@ -5,26 +5,28 @@ const CredentialsModel = require("../models/credentials-model");
 
 
 function isIdExistAsync(Id) {
-    const user = UserModel.find({ Id }).exec();
-    if (user.length > 0) return null;
+    const user = UserModel.findOne({ Id }).exec();
+    if (!user) return null;
 }
- 
+
 function registerAsync(user) {
     user.password = cryptoHelper.hash(user.password);
-    const addedUser = user.save();
-    delete addedUser.password;
-    addedUser.token = cryptoHelper.getNewToken(user);
-    return addedUser;
-} 
+    user.token = cryptoHelper.getNewToken(user);
 
-function loginAsync(email , password) {
-    // password = cryptoHelper.hash(password);
-    const users = UserModel.findOne({ email, password}).exec();
-    if (users.length === 0) return null;
+    let newUser = user.save();
+    // newUser = newUser.toObject();
+    delete user.password;
+    return newUser;
+}
 
-    // user.token = cryptoHelper.getNewToken(user);
-    
-    return users;
+function loginAsync(email, password) {
+    password = cryptoHelper.hash(password);
+    const user = UserModel.findOne({ email, password }).exec();
+    if (user.length === 0) return null;
+
+    user.token = cryptoHelper.getNewToken(user);
+    delete user.password;
+    return user;
 }
 
 module.exports = {

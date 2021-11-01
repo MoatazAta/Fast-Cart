@@ -12,10 +12,11 @@ import { NotifyService } from 'src/app/services/notify.service';
     styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
+
     public cart: CartModel;
     public user: UserModel;
-    public cartItems: ItemModel[];
-    public cartTotal = 0;
+    public cartItems: ItemModel[] = [];
+    public cartTotalPrice = 0;
 
     constructor(private notify: NotifyService, private myCartService: CartService) { }
 
@@ -24,8 +25,17 @@ export class ShoppingCartComponent implements OnInit {
             this.user = store.getState().authState.user;
             this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
             this.cartItems = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
+            if (this.cartItems) {
+                this.cartItems.forEach(item => {
+                    this.cartTotalPrice += item.totalPrice;
+                })
+            }
         } catch (err: any) {
             this.notify.error(err.message);
         }
     }
+
+    // public function rotate() {
+        
+    // }
 }

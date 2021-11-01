@@ -1,0 +1,10 @@
+.mydivoverlap{
+    position: relative;
+    z-index: 2;
+}
+.mybuttonoverlap{
+    display: none;
+}
+.mydivouter:hover .mybuttonoverlap{ 
+	display:inline-block;
+}

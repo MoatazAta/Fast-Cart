@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { CartModel } from '../models/cart.model';
 import { ItemModel } from '../models/item.model';
 import { ItemAddedAction, ItemDeletedAction, ItemsDownloadedAction, ItemUpdatedAction } from '../redux/cart-items-state';
+import { cartAddedAction, cartDownloadedAction, cartPaidAction } from '../redux/cart-state';
 import store from '../redux/store';
 
 @Injectable({
@@ -14,13 +15,23 @@ export class CartService {
     constructor(private http: HttpClient) { }
 
     public async getOpenCartByUserIdAsync(userId: string): Promise<CartModel> {
-        let openCart = await this.http.get<CartModel>(environment.cartsUrl + userId).toPromise();
-        return openCart;
+        if(store.getState().cartState.cart === null){
+            let openCart = await this.http.get<CartModel>(environment.cartsUrl + userId).toPromise();
+            store.dispatch(cartDownloadedAction(openCart));
+        }
+        return store.getState().cartState.cart;
     }
 
     public async addCartAsync(cart: CartModel): Promise<CartModel> {
         const addedCart = await this.http.post<CartModel>(environment.cartsUrl, cart).toPromise();
+        store.dispatch(cartAddedAction(addedCart));
         return addedCart;
+    }
+
+    public async cartIsPaid(cart: CartModel): Promise<CartModel> {
+        const updatedCart = await this.http.patch<CartModel>(environment.cartsUrl + cart._id,cart).toPromise();
+        store.dispatch(cartPaidAction());
+        return updatedCart;
     }
 
     public async addItemToCartAsync(item: ItemModel): Promise<ItemModel> {

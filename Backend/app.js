@@ -8,7 +8,7 @@ const productsController = require("./controllers/products-controller");
 const authController = require("./controllers/auth-controller");
 const itemsController = require("./controllers/items-controller");
 const cartController = require("./controllers/cart-controller");
-
+const orderController = require("./controllers/order-controller");
 
 const server = express();
 
@@ -20,6 +20,8 @@ server.use("/api", productsController);
 server.use("/api/auth", authController);
 server.use("/api", itemsController);
 server.use("/api", cartController);
+server.use("/api/orders", orderController);
+
 
 
 

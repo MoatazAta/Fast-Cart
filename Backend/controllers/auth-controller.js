@@ -26,18 +26,13 @@ router.post("/register", async (request, response) => {
     try {
         const userToAdd = new UserModel(request.body);
 
-        if (logic.isIdExistAsync(request.body._id)) return response.status(401).send("ID already exist");
+        if (logic.isIdExistAsync(request.body._id)) return response.status(401).send("someone singed-in with this ID!");
 
         // Validate: 
-        const errors = await credentials.validateSync();
+        const errors = await userToAdd.validateSync();
         if (errors) return response.status(400).send(errors.message);
 
-
-        // const isEmailExist = await logic.isEmailExistAsync(userToAdd.username);
-        // if (isEmailExist === null) return response.status(400).send("email already used!");
-
         const addedUser = await logic.registerAsync(userToAdd);
-
         response.status(201).json(addedUser)
     }
     catch (err) {

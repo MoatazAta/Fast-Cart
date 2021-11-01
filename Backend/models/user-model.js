@@ -33,7 +33,8 @@ const UserSchema = mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
-    }
+    },
+    token: String
 
 }, { versionKey: false });
 

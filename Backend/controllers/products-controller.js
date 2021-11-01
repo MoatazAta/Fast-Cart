@@ -5,8 +5,10 @@ const path = require("path");
 const fs = require('fs');
 const expressFileUpload = require("express-fileupload");
 const router = express.Router();
+const verifyLoggedIn = require("../middleware/verify-logged-in");
+const verifyAdmin = require("../middleware/verify-admin");
 
-router.get("/products", async(request, response) => {
+router.get("/products", async (request, response) => {
     try {
         const products = await productsLogic.getAllProductsAsync();
         response.json(products);
@@ -15,7 +17,7 @@ router.get("/products", async(request, response) => {
     }
 });
 
-router.get("/categories", async(request, response) => {
+router.get("/categories", async (request, response) => {
     try {
         const categories = await productsLogic.getAllCategoriesAsync();
         response.json(categories);
@@ -25,7 +27,7 @@ router.get("/categories", async(request, response) => {
 });
 
 //GET One Product
-router.get("/products/:id", async(request, response) => {
+router.get("/products/:id", async (request, response) => {
     try {
         const id = request.params.id;
         const product = await productsLogic.getOneProductAsync(id);
@@ -36,7 +38,7 @@ router.get("/products/:id", async(request, response) => {
     }
 });
 
-router.get("/products/products-per-category/:categoryId", async(request, response) => {
+router.get("/products/products-per-category/:categoryId", async (request, response) => {
     try {
         const categoryId = request.params.categoryId;
         const products = await productsLogic.getProductsByCategoryAsync(categoryId);
@@ -47,7 +49,7 @@ router.get("/products/products-per-category/:categoryId", async(request, respons
 });
 
 //POST
-router.post("/products", async(request, response) => {
+router.post("/products", async (request, response) => {
     try {
         if (!request.files.image) {
             response.status(400).send("No image sent.");
@@ -64,8 +66,8 @@ router.post("/products", async(request, response) => {
         response.status(500).send(err.message);
     }
 });
-
-router.delete("/products/:id", async(request, response) => {
+ 
+router.delete("/products/:id", async (request, response) => {
     try {
         const id = request.params.id;
         const deletedProduct = await productsLogic.deleteProductAsync(id);
@@ -79,7 +81,7 @@ router.delete("/products/:id", async(request, response) => {
 
 
 // PUT one product: http://localhost:3001/api/products/some-id 
-router.put("/products/:_id", async(request, response) => {
+router.put("/products/:_id", async (request, response) => {
     try {
         const _id = request.params._id;
         request.body._id = _id;

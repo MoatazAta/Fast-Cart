@@ -1,0 +1,22 @@
+#collapseOne{
+    overflow-y: scroll !important;
+    max-height: 600px !important;
+}
+
+/* .list-group {
+    width:200px;
+} */
+.rotated {
+    transform: rotate(180deg);
+  }
+#checkout {
+    float:right;
+}
+.card-header {
+    color:white;
+    display: inline-block;
+}
+
+.header-details{
+    float: left;
+}

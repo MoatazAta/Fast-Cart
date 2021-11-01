@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartModel } from 'src/app/models/cart.model';
 import { CategoryModel } from 'src/app/models/category.model';
 import { ItemModel } from 'src/app/models/item.model';
@@ -23,20 +24,21 @@ export class ProductListComponent implements OnInit {
     public cart: CartModel;
     public items: ItemModel[];
 
-    constructor(private myProductsService: ProductsService, private notify: NotifyService, private myCartService: CartService) { }
+    constructor(private myProductsService: ProductsService, private myRouter: Router, private notify: NotifyService, private myCartService: CartService) { }
 
     async ngOnInit() {
         try {
             this.user = store.getState().authState.user;
-
             this.categories = await this.myProductsService.getAllCategoriesAsync();
             //Resume Shopping.
             this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
             this.items = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
-
         }
 
         catch (err: any) {
+            if (err.message === "Your login session has expired.") {
+                this.myRouter.navigateByUrl("/login");
+            }
             this.notify.error(err.message);
         }
     }
@@ -46,7 +48,7 @@ export class ProductListComponent implements OnInit {
             const categoryId = (args.target as HTMLSelectElement).value;
             this.products = await this.myProductsService.getProductsByCategoryAsync(categoryId);
         } catch (err: any) {
-            this.notify.error(err.message)
+            this.notify.error(err.message);
         }
     }
 

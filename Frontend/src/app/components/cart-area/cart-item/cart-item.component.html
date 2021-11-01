@@ -2,10 +2,11 @@
     <div class="cart-header">
 
     </div>
-    <div>
+    <div class="mydivouter">
         <span>{{ cartItem.quantity }}</span> x
         <span>{{ cartItem.product.name }}</span>:
         <strong>{{ (cartItem.quantity * cartItem.product.price) | currency:'ILS' }}</strong>
+        <button type="button" class="mybuttonoverlap btn btn-danger" (click)="deleteItem(cartItem._id)">x</button>
     </div>
 
 </div>

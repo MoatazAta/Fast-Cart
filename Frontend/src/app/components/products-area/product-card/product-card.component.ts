@@ -23,7 +23,7 @@ export class ProductCardComponent implements OnInit {
     public cart: CartModel;
 
     @Input()
-    public cartItems: ItemModel[];
+    public cartItems: ItemModel[] = [];
 
     public imageAddress: string;
     public item = new ItemModel;
@@ -34,13 +34,15 @@ export class ProductCardComponent implements OnInit {
     }
     async ngOnInit() {
         try {
-            this.cartItems.forEach(item => {
-                if(JSON.stringify(item.product) === JSON.stringify(this.product)){
-                    this.addedToCart = true;
-                    this.item = item;
-                }
-            });
-                
+            if (this.cartItems) {
+                this.cartItems.forEach(item => {
+                    if (JSON.stringify(item.product) === JSON.stringify(this.product)) {
+                        this.addedToCart = true;
+                        this.item = item;
+                    }
+
+                });
+            }
             this.imageAddress = environment.productImagesUrl + this.product.imageName;
 
         } catch (err: any) {

@@ -27,6 +27,8 @@ import { ShoppingCartComponent } from './components/cart-area/shopping-cart/shop
 import { CartItemComponent } from './components/cart-area/cart-item/cart-item.component';
 import { FooterComponent } from './components/layout-area/footer/footer.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { CartOrderComponent } from './components/cart-area/cart-order/cart-order.component';
 
 
 
@@ -46,6 +48,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
         ShoppingCartComponent,
         CartItemComponent,
         FooterComponent,
+        CartOrderComponent,
 
 
     ],
@@ -56,7 +59,9 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
         ReactiveFormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        MDBBootstrapModule.forRoot()
+        MDBBootstrapModule.forRoot(),
+        Ng2SearchPipeModule
+
 
     ],
     exports: [],

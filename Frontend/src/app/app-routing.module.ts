@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth-area/login/login.component';
 import { LogoutComponent } from './components/auth-area/logout/logout.component';
 import { RegisterComponent } from './components/auth-area/register/register.component';
+import { CartOrderComponent } from './components/cart-area/cart-order/cart-order.component';
 import { HomeComponent } from './components/home-area/home/home.component';
 import { PageNotFoundComponent } from './components/layout-area/page-not-found/page-not-found.component';
 import { AddProductComponent } from './components/products-area/add-product/add-product.component';
@@ -15,12 +16,13 @@ const routes: Routes = [
 
     { path: "register", component: RegisterComponent },
     { path: "login", component: LoginComponent },
-    { path: "logout", component: LogoutComponent },
+    { path: "logout", canActivate: [AuthGuard], component: LogoutComponent },
 
-    { path: "products", component: ProductListComponent },
-    { path: "products/new", canDeactivate: [IncompleteGuard], component: AddProductComponent },
+    { path: "products", canActivate:[AuthGuard], component: ProductListComponent },
+    { path: "products/new",canActivate:[AuthGuard], canDeactivate: [IncompleteGuard], component: AddProductComponent },
+    { path: "order",canActivate:[AuthGuard], canDeactivate: [IncompleteGuard], component: CartOrderComponent },
 
-    
+
     { path: "", redirectTo: "/home", pathMatch: "full" }, // pathMath: full = exact in React
     { path: "**", component: PageNotFoundComponent } // 404 - must be last!
 ];
