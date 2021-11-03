@@ -1,3 +1,8 @@
+.order{
+    height: 100%;
+    display: grid;
+    width: 100%;
+}
 div {
     width: 80%;
     margin: auto;
@@ -9,17 +14,19 @@ form {
     margin: auto;
     box-sizing: border-box;
     padding: 10px;
-    text-align: right;
+    text-align: left;
 }
 
 input, label {
-    margin: 20px auto;
-	width: 100%;
+    margin: 10px auto;
+	width: 70%;
     box-sizing: border-box;
     height: 30px;
     font-weight: bold;
 }
-
+.box {
+    width: 50%;
+}
 
 h4 {
     color:green;
@@ -62,8 +69,29 @@ table {
     width: 100%;
     background-color: green;
     color: white;
-    text-align: center;
     height: 80px;
+    /* display: grid; */
+    /* grid-template-columns: 1fr 2fr; */
+    /* grid-gap: 70em; */
+
+}
+.proceed {
+    /* display: flex; */
+    position: absolute;
+    display: flex;
+    
+    width:25%;
+    bottom: 10px;
+    right: 0;
+}
+.proceed button {
+    margin-left: 1em;
+}
+.back {
+    width: 10%;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
 }
   
  

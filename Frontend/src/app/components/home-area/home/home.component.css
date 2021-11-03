@@ -1,29 +1,46 @@
-.home1{
-    /* display: flex;                  
-    flex-direction: row;            
-    flex-wrap: nowrap;             
-    justify-content: space-between; */
-    background-color: white; 
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 20% 20% 60%;
-    gap: 2px;
-}
-div {
-    padding: 5px;
-    margin: 10px;
-}
-.home{
-    height: 100%;
+.parallax {
+    background-image: url('../../../../assets/images/main.jpg'); 
+    width: 100%;
+    height: 80%; 
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    overflow: hidden; 
+    margin: auto;
 }
 
+/* img {
+    margin: 20px auto;
+} */
 
-img{
-    width: 600px;
-    height:310px;
-} 
+.parallax-container {
+    max-width: 1200px;
+    margin: auto;
+}
 
-p {
-    font-size: xx-large;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-} 
+.parallax-content {
+    width: 500px;
+    height: 280px;
+    text-align: left;
+    background-color: rgb(252, 252, 252, .4);
+    /* margin: 200px 100px;  */
+    border-radius: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+span {
+    display: block;
+    text-align: left;
+}
+
+h3 {
+    color: #bf2717;
+}
+
+h5 {
+    color: #57565c;
+}
+
+h3, h5 {
+    padding-top: 40px;
+}

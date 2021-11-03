@@ -1,68 +1,83 @@
-<div>
-    <div class="header">
+<div class="order">
+    <div>
+        <div class="header">
 
-        <h4>Your shopping cart</h4>
-        <form class="form-inline">
-            <input class="form-control mr-sm-0" name="search" type="search" placeholder="Search in cart">
-            <button class="btn btn-outline-success my-0 my-sm" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
-                    width="12" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 14 14">
-                    <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg></button>
+            <h4>Your shopping cart</h4>
+            <form class="form-inline">
+                <input class="form-control mr-sm-0" name="search" type="search" placeholder="Search in cart">
+                <button class="btn btn-outline-success my-0 my-sm" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="12" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 14 14">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg></button>
+            </form>
+        </div>
+        <br>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Quantity</th>
+                        <th>Product name</th>
+                        <th>Unit price</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of items">
+                        <td><button type="button" class="mybuttonoverlap btn btn-danger" value={{i._id}}
+                                (click)="deleteItem(i._id)">x</button></td>
+                        <td>{{i.quantity}}</td>
+                        <td> <img src='http://localhost:3001/api/products/images/{{i.product.imageName}}' width="40"
+                                height="40" alt={{i.product._id}}>
+                            {{i.product.name}}</td>
+                        <td><strong>{{i.product.price | currency:'ILS'}}</strong></td>
+                        <td><strong>{{i.totalPrice | currency:'ILS'}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- <app-customer-cart [orderShow]="true"></app-customer-cart> (dblclick)="autoComplete()" -->
+    <div class="box">
+        <form (submit)="addOrder()" #formInfo="ngForm">
+            <h5>Shipping Details</h5>
+            <label>City</label>
+            <input type="text" name="city" [(ngModel)]="order.city" #cityInfo="ngModel" minlength="2">
+            <span *ngIf="cityInfo.errors?.required && cityInfo.touched">city required</span>
+            <span *ngIf="cityInfo.errors?.minlength && cityInfo.touched">city </span>
+
+            <label>street</label>
+            <input #streetBox="ngModel" type="text" name="street" [(ngModel)]="order.street" #streetInfo="ngModel"
+                required minlength="2">
+            <span *ngIf="streetInfo.errors?.required && streetInfo.touched">street required</span>
+            <span *ngIf="streetInfo.errors?.minlength && streetInfo.touched">street minimum 2 characters</span>
+
+            <label>Delivery Date</label>
+            <input type="date" name="date" [(ngModel)]="order.date" #deliveryDateInfo="ngModel" required min={{today}}>
+            <span *ngIf="deliveryDateInfo.errors?.required && deliveryDateInfo.touched">delivery date required</span>
+
+            <label>Credit card</label>
+            <input type="text" name="creditCard" [(ngModel)]="order.creditCard" #creditCardInfo="ngModel" required>
+            <span *ngIf="creditCardInfo.errors?.required && creditCardInfo.touched">credit card required</span>
+            <span *ngIf="creditCardInfo.errors?.pattern && creditCardInfo.touched">something wrong!</span>
         </form>
     </div>
-    <br>
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th>Quantity</th>
-                <th>Product name</th>
-                <th>Unit price</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let i of items">
-                <td><button type="button" class="mybuttonoverlap btn btn-danger" value={{i._id}} (click)="deleteItem(i._id)">x</button></td>
-                <td>{{i.quantity}}</td>
-                <td> <img src='http://localhost:3001/api/products/images/{{i.product.imageName}}' width="40" height="40"
-                        alt={{i.product._id}}>
-                    {{i.product.name}}</td>
-                <td><strong>{{i.product.price | currency:'ILS'}}</strong></td>
-                <td><strong>{{i.totalPrice | currency:'ILS'}}</strong></td>
-            </tr>
-        </tbody>
-    </table>
+
+    <div class="footer">
+        
+        <div class="back">
+            <button type="button" class="btn btn-success">Continue Shopping</button>
+
+        </div>
+        <div class="proceed">
+            <p>Estimated Total: </p> 
+            <strong><small>({{items.length}} Items)</small>{{orderPrice | currency:"ILS"}}</strong>
+            <button type="button" class="btn btn-danger" [disabled]="formInfo.form.invalid" (click)="proceedToCheckout()">Proceed to checkout</button>
+
+        </div>
+
+    </div>
 </div>
-<div class="footer">
-    <p>Footer</p>
-</div>
-<!-- <app-customer-cart [orderShow]="true"></app-customer-cart> (dblclick)="autoComplete()" -->
-<!-- <form #myForm="ngForm" (submit)="addOrder() ">
-    <h5>Shipping Details</h5>
-    <label>City</label>
-    <input #cityBox="ngModel" type="text" name="city" [(ngModel)]="order.city" required pattern="^$" minlength="2">
-    <span *ngIf="cityBox.errors?.required && cityBox.touched">city required</span>
-    <span *ngIf="cityBox.errors?.pattern && cityBox.touched"></span>
-    <span *ngIf="cityBox.errors?.minlength && cityBox.touched">city </span>
-
-    <label>street</label>
-    <input #streetBox="ngModel" type="text" name="street" [(ngModel)]="order.street" required
-        pattern="^[a-zא-ת]+(?:[\s-][a-zא-ת0-9]+)*$" minlength="2">
-    <span *ngIf="streetBox.errors?.required && streetBox.touched">street required</span>
-    <span *ngIf="streetBox.errors?.pattern && streetBox.touched"></span>
-    <span *ngIf="streetBox.errors?.minlength && streetBox.touched">street minimum 2 characters</span>
-
-    <label>Delivery Date</label>
-    <input #deliveryDateBox="ngModel" type="date" name="date" [(ngModel)]="order.date" required min={{today}}>
-    <span *ngIf="deliveryDateBox.errors?.required && deliveryDateBox.touched">delivery date required</span>
-
-    <label>Credit card</label>
-    <input #creditCardBox="ngModel" type="text" name="creditCard" [(ngModel)]="order.creditCard" required
-        pattern="\d{4}[\s\-]*\d{4}[\s\-]*\d{4}[\s\-]*\d{4}">
-    <span *ngIf="creditCardBox.errors?.required && creditCardBox.touched">credit card required</span>
-    <span *ngIf="creditCardBox.errors?.pattern && creditCardBox.touched">something wrong!</span>
-
-    <button [disabled]="myForm.form.invalid">submit</button>
-</form> -->

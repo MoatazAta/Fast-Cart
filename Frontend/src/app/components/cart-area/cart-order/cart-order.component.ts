@@ -17,19 +17,23 @@ import { environment } from 'src/environments/environment';
 })
 export class CartOrderComponent implements OnInit {
 
-    public order: OrderModel;
+    public order = new OrderModel;
     public today = new Date().toISOString().split('T')[0];
-    public items: ItemModel[];
+    public items: ItemModel[] = [];
     public cart: CartModel;
     public user: UserModel;
     public imageAddress: string;
-
+    public checkout: Boolean = false;
+    public orderPrice = 0;
     constructor(private notify: NotifyService, private myCartService: CartService, private myOrderService: OrderService, private myRouter: Router) { }
     async ngOnInit() {
         try {
             this.user = store.getState().authState.user;
             this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
             this.items = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
+            this.items.forEach(item => {
+                this.orderPrice += item.totalPrice;
+            })
             this.imageAddress = environment.productImagesUrl;
 
         } catch (err) {
@@ -44,12 +48,14 @@ export class CartOrderComponent implements OnInit {
             await this.myCartService.cartIsPaid(this.cart);
             this.notify.success("your order paid successfully");
             this.myRouter.navigateByUrl("/home");
-
         } catch (err: any) {
             this.notify.error(err);
         }
     }
 
+    public proceedToCheckout(){
+        this.checkout = true;
+    }
     public async deleteItem(_id:string) {
         try {
             await this.myCartService.deleteItemAsync(_id);

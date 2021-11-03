@@ -1,15 +1,28 @@
-/* div.box {
-	width: 300px;
-    background-image: linear-gradient(45deg, lightgreen, white);
-    display: inline-flex;
-    align-items: center;
-    padding-right: 0;
-} */
-
 img {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    width: 150px;
+    height: 150px;
     vertical-align: middle;
+    position: relative;
+    left: 1em;
+}
+.btn-group {
+    /* position:absolute; */
+    /* top: 40px; */
+}
+.card {
+    height: 250px;
+    position: relative;
+    display:grid;
+    grid-template-rows: 70% 30%;
+}
+.card-text {
+    position: relative;
+    right: 4em;
+    margin-bottom: 3em;
+    /* display:flex; */
+    /* flex-direction: column; */
+    margin: 0;
 }
 .qty {
     display: inline-block;
