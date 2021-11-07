@@ -33,6 +33,7 @@ export class ProductListComponent implements OnInit {
             //Resume Shopping.
             this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
             this.items = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
+            this.products = await this.myProductsService.getAllProductsAsync();
         }
 
         catch (err: any) {
@@ -50,6 +51,11 @@ export class ProductListComponent implements OnInit {
         } catch (err: any) {
             this.notify.error(err.message);
         }
+    }
+
+    public searchProducts(event: Event) {
+        const searchWord = (event.target as HTMLInputElement).value.toLowerCase();
+        this.products = store.getState().productsState.products.filter(p => p.name.toLowerCase().includes(searchWord));
     }
 
 }

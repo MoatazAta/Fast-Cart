@@ -14,6 +14,17 @@ router.get("/", async (request, response) => {
     }
 });
 
+router.get("/:_id", async (request, response) => {
+    try {
+        const _id = request.params._id;
+        const latestOrder = await logic.getLatestOrderAsync(_id);
+        response.json(latestOrder);
+    }
+    catch(err) {
+        response.status(500).send(err.message);
+    }
+});
+
 
 router.post("/", async (request, response) => {
     try {

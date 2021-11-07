@@ -3,9 +3,11 @@
 
     </div>
     <div class="mydivouter">
-        <span>{{ cartItem.quantity }}</span> x
-        <span>{{ cartItem.product.name }}</span>:
-        <strong>{{ (cartItem.quantity * cartItem.product.price) | currency:'ILS' }}</strong>
+        <span>{{ cartItem.quantity }}</span>
+        <img src='http://localhost:3001/api/products/images/{{cartItem.product.imageName}}' width="50" height="40"
+            alt={{cartItem.product._id}}>
+        <span>{{ cartItem.product.name }}</span>
+        <strong class="price">{{ (cartItem.quantity * cartItem.product.price) | currency:'ILS' }}</strong>
         <button type="button" class="mybuttonoverlap btn btn-danger" (click)="deleteItem(cartItem._id)">x</button>
     </div>
 

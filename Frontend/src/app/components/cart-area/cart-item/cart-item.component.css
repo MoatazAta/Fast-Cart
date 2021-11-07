@@ -7,4 +7,16 @@
 }
 .mydivouter:hover .mybuttonoverlap{ 
 	display:inline-block;
+    margin-left: 2em;
+} 
+
+.mydivouter {
+    height: 60px;
+    position: relative;
+}
+
+.price {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }

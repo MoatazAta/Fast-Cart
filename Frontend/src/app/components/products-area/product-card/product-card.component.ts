@@ -52,11 +52,6 @@ export class ProductCardComponent implements OnInit {
     }
 
     public async handleAddToCart() {
-        if (!this.cart) {
-            const cartToAdd = new CartModel;
-            cartToAdd.userId = this.user._id;
-            this.cart = await this.myCartService.addCartAsync(cartToAdd)
-        }
         this.item.product = this.product;
         this.item.quantity = 1;
         this.item.totalPrice = this.item.product.price * this.item.quantity;

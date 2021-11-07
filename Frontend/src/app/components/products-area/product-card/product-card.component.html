@@ -2,7 +2,7 @@
     <div>
         <img class="bd-placeholder-img card-img-top p-2" [src]="imageAddress" />
         <div class="btn-group">
-            <button *ngIf="addedToCart === false" type="button" class="btn btn-sm btn-success product-btn"
+            <button  *ngIf="addedToCart === false" type="button" class="btn btn-sm btn-success product-btn"
                 (click)="handleAddToCart()">Add to cart <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                     fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
                     <path
@@ -17,7 +17,7 @@
                 <span class="plus bg-success" (click)="handlePlus()">+</span>
             </div>
         </div>
-    </div>
+    </div> 
     <div class="card-body">
         <p class="card-text">{{ product.name }}</p>
         <p class="card-text">

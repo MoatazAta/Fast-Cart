@@ -1,50 +1,22 @@
 <div class="parallax">
     <div class="parallax-container">
         <div class="parallax-content">
-            <h3>Welcome</h3>
-            <h5>Order Online Today!</h5>
-            <app-login></app-login>
-            <span>✉️ supermarket@gmail.com</span>
-            <span>📞 054-565-7873</span>
+            <div *ngIf="user == null">
+                <h3>Order Online Today!</h3>
+                <h5>Join us now</h5>
+                <app-login></app-login>
+            </div>
+            <div *ngIf="user != null">
+                <h3>Welcome {{user.firstName}} {{user.lastName}}</h3>
+                <div *ngIf="!cart?.isPaid && cart">
+                    <span>You have open cart from <strong>{{cart.date}}</strong></span>
+                    <button class="btn btn-success" (click)="handleResumeShopping()" >Resume Shopping</button>
+                </div>
+                    <span *ngIf="latestOrder && cart?.isPaid">Your last purchase was on <strong>{{latestOrder.date}}</strong></span>
+                    <span *ngIf="!cart && !latestOrder">Welcome to Fast-Cart</span>
+                    <button class="btn btn-success" *ngIf="cart?.isPaid || !cart" (click)="addCart()">Start Shopping</button>
+
+            </div>
         </div>
     </div>
 </div>
-
-<!-- <div class="container">
-    <div class="container px-40">
-        <div class="row gx-6">
-            <div class="col-6">
-                <div class="p-3 border bg-light">
-                    <p>Sign in or sing-up now! </p>
-
-                    <app-login></app-login>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="p-3 border bg-light">
-                    <img src="../../../../assets/images/home5.jpeg" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="../../../../assets/images/home2.jpg" />
-        </div>
-        <br>
-        <div class="col-sm-6">
-            <p>New week begin in supermarket,<br>you order online and the delivery on us </p>
-        </div>
-    </div>
-
-
-    <div class="home1">
-        <div>
-        </div>
-        <div>
-            <img src="../../../../assets/images/home3.png" />
-        </div>
-
-    </div>
-</div> -->

@@ -4,7 +4,7 @@ img {
     height: 150px;
     vertical-align: middle;
     position: relative;
-    left: 1em;
+    left: 0.5em;
 }
 .btn-group {
     /* position:absolute; */
@@ -27,41 +27,41 @@ img {
 .qty {
     display: inline-block;
     border: 2px solid green;
+    margin-left: 2.5em;
     border-radius: 10px;
-
+    width: 65%;
+    height: 32px;
 }
 .qty .count {
-    color:black;
+    color:green;
     display: inline-block;
     vertical-align: top;
-    font-size: 25px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 30px;
     /* padding: 0 2px; */
     min-width: 35px;
+    height: 28px;
     text-align: center;
 }
 .qty .plus {
     cursor: pointer;
     display: inline-block;
-    vertical-align: top;
     color: white;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 28px;
     font: 30px/1 Arial,sans-serif;
     text-align: center;
-    border-radius: 50%;
     }
 .qty .minus {
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
     color: white;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 28px;
     font: 30px/1 Arial,sans-serif;
     text-align: center;
-    border-radius: 50%;
     background-clip: padding-box;
 }
 div {

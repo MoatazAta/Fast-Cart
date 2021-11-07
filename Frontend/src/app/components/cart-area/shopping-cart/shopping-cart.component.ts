@@ -25,17 +25,13 @@ export class ShoppingCartComponent implements OnInit {
             this.user = store.getState().authState.user;
             this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
             this.cartItems = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
-            if (this.cartItems) {
-                this.cartItems.forEach(item => {
-                    this.cartTotalPrice += item.totalPrice;
-                })
-            }
+            store.subscribe(() => {
+                this.cartTotalPrice = this.cartItems?.reduce((sum, item) => sum + item.totalPrice, 0);
+                this.cartItems = store.getState().itemsState.items;
+            });
+        
         } catch (err: any) {
             this.notify.error(err.message);
         }
     }
-
-    // public function rotate() {
-        
-    // }
 }
