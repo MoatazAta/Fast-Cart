@@ -9,7 +9,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { NotifyService } from 'src/app/services/notify.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { combineReducers, Unsubscribe } from 'redux';
+import { Unsubscribe } from 'redux';
 
 @Component({
     selector: 'app-home',
@@ -18,11 +18,11 @@ import { combineReducers, Unsubscribe } from 'redux';
 })
 export class HomeComponent implements OnInit {
     public products: ProductModel[] = [];
-    public user: UserModel;
+    public user: UserModel = store.getState().authState.user;
     public cart: CartModel;
     public latestOrder: OrderModel;
     public orders: OrderModel[] = [];
-
+ 
     private unsubscribeMe: Unsubscribe;
 
     constructor(private myProductsService: ProductsService, private myCartService: CartService,
@@ -32,11 +32,11 @@ export class HomeComponent implements OnInit {
         try {
             this.unsubscribeMe = store.subscribe(async () => {
                 this.user = store.getState().authState.user;
+                if (this.user?.isAdmin) {
+                    this.myRouter.navigateByUrl("/products");
+                    return;
+                }
                 if (this.user) {
-                    if (this.user.isAdmin) {
-                        this.myRouter.navigateByUrl("/products");
-                        return;
-                    }
                     this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
                     this.latestOrder = await this.myOrderService.getLatestOrderAsync(this.user._id);
                 }
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
         this.myRouter.navigateByUrl("/products");
         console.log(this.cart);
     }
-    public handleResumeShopping(){
+    public handleResumeShopping() {
         this.myRouter.navigateByUrl("/products");
     }
     ngOnDestroy(): void {

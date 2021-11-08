@@ -14,6 +14,17 @@ router.get("/items", async (request, response) => {
     }
 });
 
+router.get("/items/:productId", async (request, response) => {
+    try {
+        const _id = request.params.productId;
+        const item = await logic.getItemByProductIdAsync(_id);
+        response.json(item);
+    }
+    catch(err) {
+        response.status(500).send(err.message);
+    }
+});
+
 router.get("/items/cart/:_id", async (request, response) => {
     try {
         const _id = request.params._id;

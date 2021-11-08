@@ -6,31 +6,26 @@
     <div class="col-md-8">
         <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
             <nav>
-                <button class="nav-link" value={{c._id}} *ngFor="let c of categories"
+                <button class="cat-nav active" value={{c._id}} *ngFor="let c of categories"
                     (click)="showProducts($event)">{{c.name}}</button>
-
-                <div class="animation start-home"></div>
             </nav>
-            <li class="nav2">
                 <form class="form-inline mr-sm-3 my-lg-0">
                     <input class="form-control mr-sm-6" name="search" type="search" placeholder="Search in FastCart"
                         (input)="searchProducts($event)">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
-            </li>
-
         </ul>
 
         <!-- <a routerLink="/products/new">Add Product</a> -->
 
         <div class="row">
             <div class="col-md-2" *ngFor="let p of products">
-                <app-product-card [product]="p" [user]="user" [cart]="cart" [cartItems]="items"></app-product-card>
+                <app-product-card [product]="p" [user]="user" [cart]="cart"></app-product-card>
             </div>
         </div>
     </div>
 
-    <div class="col">
+    <div *ngIf="!user?.isAdmin" class="col">
         <app-shopping-cart></app-shopping-cart>
     </div>
 </div>

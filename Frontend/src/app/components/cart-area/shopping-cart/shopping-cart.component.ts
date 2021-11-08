@@ -23,13 +23,13 @@ export class ShoppingCartComponent implements OnInit {
     async ngOnInit() {
         try {
             this.user = store.getState().authState.user;
-            this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
-            this.cartItems = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
+            this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user?._id);
+            this.cartItems = await this.myCartService.getItemsByCartIdAsync(this.cart?._id);
             store.subscribe(() => {
-                this.cartTotalPrice = this.cartItems?.reduce((sum, item) => sum + item.totalPrice, 0);
                 this.cartItems = store.getState().itemsState.items;
+                this.cartTotalPrice = this.cartItems?.reduce((sum, item) => sum + item.totalPrice, 0);
             });
-        
+            this.cartTotalPrice = this.cartItems?.reduce((sum, item) => sum + item.totalPrice, 0);
         } catch (err: any) {
             this.notify.error(err.message);
         }

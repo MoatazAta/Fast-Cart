@@ -23,7 +23,6 @@ export class CartOrderComponent implements OnInit {
     public cart: CartModel;
     public user: UserModel;
     public imageAddress: string;
-    public checkout: Boolean = false;
     public orderPrice = 0;
     constructor(private notify: NotifyService, private myCartService: CartService, private myOrderService: OrderService, private myRouter: Router) { }
     async ngOnInit() {
@@ -31,15 +30,14 @@ export class CartOrderComponent implements OnInit {
             this.user = store.getState().authState.user;
             this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
             this.items = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
-            this.items.forEach(item => {
-                this.orderPrice += item.totalPrice;
-            })
+            this.orderPrice = this.items?.reduce((sum, item) => sum + item.totalPrice, 0);
             this.imageAddress = environment.productImagesUrl;
 
         } catch (err) {
             this.notify.error(err);
         }
     }
+
     public async addOrder() {
         try {
             this.order.cartId = this.cart._id;
@@ -53,14 +51,19 @@ export class CartOrderComponent implements OnInit {
         }
     }
 
-    public proceedToCheckout(){
-        this.checkout = true;
+    public Checkout(){
     }
+
     public async deleteItem(_id:string) {
         try {
             await this.myCartService.deleteItemAsync(_id);
         } catch (err: any) {
             this.notify.error(err);
         }
+    }
+
+    public searchProducts(event: Event) {
+        const searchWord = (event.target as HTMLInputElement).value.toLowerCase();
+        this.items = store.getState().itemsState.items.filter(i => i.product.name.toLowerCase().includes(searchWord));
     }
 }

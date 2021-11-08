@@ -32,7 +32,9 @@ export class ProductListComponent implements OnInit {
             this.categories = await this.myProductsService.getAllCategoriesAsync();
             //Resume Shopping.
             this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
-            this.items = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
+            if (this.cart) {
+                this.items = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
+            }
             this.products = await this.myProductsService.getAllProductsAsync();
         }
 
@@ -47,7 +49,7 @@ export class ProductListComponent implements OnInit {
     public async showProducts(args: Event) {
         try {
             const categoryId = (args.target as HTMLSelectElement).value;
-            this.products = await this.myProductsService.getProductsByCategoryAsync(categoryId);
+            this.products = store.getState().productsState.products.filter(p => p.categoryId === categoryId);
         } catch (err: any) {
             this.notify.error(err.message);
         }
