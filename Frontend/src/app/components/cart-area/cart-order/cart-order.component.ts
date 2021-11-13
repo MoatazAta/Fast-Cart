@@ -24,7 +24,9 @@ export class CartOrderComponent implements OnInit {
     public user: UserModel;
     public imageAddress: string;
     public orderPrice = 0;
+
     constructor(private notify: NotifyService, private myCartService: CartService, private myOrderService: OrderService, private myRouter: Router) { }
+    
     async ngOnInit() {
         try {
             this.user = store.getState().authState.user;
@@ -33,7 +35,11 @@ export class CartOrderComponent implements OnInit {
             this.orderPrice = this.items?.reduce((sum, item) => sum + item.totalPrice, 0);
             this.imageAddress = environment.productImagesUrl;
 
-        } catch (err) {
+        } catch (err: any) {
+            if(err.status === 403 || err.status === 401) {
+                this.myRouter.navigateByUrl("/logout"); 
+                return;
+            }
             this.notify.error(err);
         }
     }
@@ -42,17 +48,18 @@ export class CartOrderComponent implements OnInit {
         try {
             this.order.cartId = this.cart._id;
             this.order.userId = this.user._id;
+            this.order.price = this.orderPrice;
             this.order = await this.myOrderService.addOrderAsync(this.order);
-            await this.myCartService.cartIsPaid(this.cart);
+            this.cart = await this.myCartService.cartIsPaid(this.cart);
             this.notify.success("your order paid successfully");
             this.myRouter.navigateByUrl("/home");
         } catch (err: any) {
             this.notify.error(err);
         }
     }
-
-    public Checkout(){
-    }
+     public continueShopping(){
+         this.myRouter.navigateByUrl("/products");
+     }
 
     public async deleteItem(_id:string) {
         try {
@@ -66,4 +73,5 @@ export class CartOrderComponent implements OnInit {
         const searchWord = (event.target as HTMLInputElement).value.toLowerCase();
         this.items = store.getState().itemsState.items.filter(i => i.product.name.toLowerCase().includes(searchWord));
     }
+
 }

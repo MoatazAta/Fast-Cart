@@ -18,6 +18,7 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductListComponent implements OnInit {
 
     public products: ProductModel[];
+    public product = new ProductModel;
     public categories: CategoryModel[];
     public selectedCategory: string;
     public user: UserModel;
@@ -30,17 +31,19 @@ export class ProductListComponent implements OnInit {
         try {
             this.user = store.getState().authState.user;
             this.categories = await this.myProductsService.getAllCategoriesAsync();
-            //Resume Shopping.
-            this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user._id);
+            //Resume Shopping. 
+            this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user?._id);
+
             if (this.cart) {
-                this.items = await this.myCartService.getItemsByCartIdAsync(this.cart._id);
+                this.items = await this.myCartService.getItemsByCartIdAsync(this.cart?._id);
             }
             this.products = await this.myProductsService.getAllProductsAsync();
         }
 
         catch (err: any) {
-            if (err.message === "Your login session has expired.") {
-                this.myRouter.navigateByUrl("/login");
+            if (err.status === 403 || err.status === 401) {
+                this.myRouter.navigateByUrl("/logout");
+                return;
             }
             this.notify.error(err.message);
         }
@@ -54,7 +57,7 @@ export class ProductListComponent implements OnInit {
             this.notify.error(err.message);
         }
     }
-
+    
     public searchProducts(event: Event) {
         const searchWord = (event.target as HTMLInputElement).value.toLowerCase();
         this.products = store.getState().productsState.products.filter(p => p.name.toLowerCase().includes(searchWord));

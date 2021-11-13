@@ -16,7 +16,7 @@ export class LoginComponent {
     constructor(private authService: AuthService, private router: Router, private notify: NotifyService) { }
 
     public async login() {
-        try {
+        try { 
             await this.authService.login(this.credentials);
             this.notify.success("You are logged-in");
             this.router.navigateByUrl("/home");

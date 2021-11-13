@@ -18,7 +18,7 @@ function getProductsByCategoryAsync(categoryId) {
 }
 
 function getOneProductAsync(productId) {
-    return ProductModel.find({ productId }).exec();
+    return ProductModel.findOne({ productId }).exec();
 }
 
 async function addProductAsync(product, image) {
@@ -37,12 +37,12 @@ function deleteProductAsync(_id) {
 
 
 // Update existing product (partial or full):
-async function updateProductAsync(product, newImage, currentImage) {
-    if (!newImage) {
-        product.imageName = currentImage;
-    } else {
-        let fullPath = path.join("./images/", currentImageName);
-        deleteFile(fullPath);
+async function updateProductAsync(product, newImage) {
+    if (newImage) {
+        // product.imageName = currentImage;
+
+       // let fullPath = path.join("./images/", currentImageName);
+        // deleteFile(fullPath); 
         const extension = newImage.name.substr(newImage.name.lastIndexOf("."));
         const newFileName = uuid.v4() + extension;
         product.imageName = newFileName;

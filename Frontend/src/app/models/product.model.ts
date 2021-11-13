@@ -5,7 +5,7 @@ export class ProductModel {
     name: string;
     categoryId: string; 
     price: number;
-    imageName: string;
+    imageName: string; 
     image: FileList;
     category: CategoryModel;
 }

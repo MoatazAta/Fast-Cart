@@ -14,7 +14,6 @@ const OrderSchema = mongoose.Schema({
         type: Number,
         required: [true, "price required"],
         min:[0,"price can't be negative"],
-
     },
     city: {
         type: String,
@@ -24,13 +23,16 @@ const OrderSchema = mongoose.Schema({
     street: {
         type: String,
         minLength: [3, "street must be more than 3 chars"],
-
         required: [true, "street required"]
     },
-    date: {
+    deliveryDate: {
         type: Date,
         min: new Date(Date.now()).getDate() + 1,
         required: [true, "Shipping Date required"]
+    },
+    initDate: {
+        type: Date,
+        default: Date.now,
     },
     creditCard: {
         type: String,

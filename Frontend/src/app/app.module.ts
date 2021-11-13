@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './components/layout-area/layout/layout.component';
-import { HomeComponent } from './components/home-area/home/home.component';
+import { HomeComponent } from './components/layout-area/home/home.component';
 import { RegisterComponent } from './components/auth-area/register/register.component';
 import { LoginComponent } from './components/auth-area/login/login.component';
 import { LogoutComponent } from './components/auth-area/logout/logout.component';
@@ -64,14 +64,11 @@ import { CartOrderComponent } from './components/cart-area/cart-order/cart-order
 
 
     ],
-    exports: [],
-    // providers: [CalcService], // Create CalcService object for the entire app.
 
-    // Register the interceptor so any request will invoke it:
     providers: [{
-        provide: HTTP_INTERCEPTORS, // Register the interceptor
-        useClass: AuthInterceptor, // Our interceptor class
-        multi: true // Can register it several times if needed
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor, 
+        multi: true 
     }],
 
     bootstrap: [LayoutComponent]

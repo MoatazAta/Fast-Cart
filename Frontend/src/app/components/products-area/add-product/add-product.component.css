@@ -1,21 +1,28 @@
 form {
-    width: 250px;
+    width: 350px;
 }
 
 input,
 select {
     width: 100%;
     box-sizing: border-box;
-    margin: 0 0 20px 0;
+}
+label {
+    margin-top: 50px;
+    position: relative;
+    display: block;
 }
 
 button {
     width: 100%;
-    margin: 10px 0 20px 0;
+    margin: 20px 0 20px 0;
 }
 
 span {
-    color: red;
-    margin: 0 20px;
-    position: absolute;
+    color: rgb(155, 12, 12);
+    float: left;
+}
+
+h2 {
+    color: rgb(28, 151, 17);
 }

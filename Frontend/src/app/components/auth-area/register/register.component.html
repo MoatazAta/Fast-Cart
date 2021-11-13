@@ -1,6 +1,8 @@
-<div class="box">
+<div class="Box">
+    <div class="header">
+        <h2>Registration for the Fast-Cart website</h2>
 
-    <h2>Register</h2>
+    </div>
 
     <!-- <form [formGroup]="productForm" (submit)="register()">
 
@@ -40,66 +42,63 @@
         <button>next</button>
     </form> -->
 
-    <form [formGroup]="productForm" (submit)="register()">
+    <form [formGroup]="productForm" (submit)="register()" #formInfo="ngForm">
+        <p>Required fields are marked with *</p>
         <div class="form-row">
             <div class="col-md-6 mb-3">
-                <label for="validationCustom01">ID</label>
-                <input type="text" class="form-control" id="validationCustom01" required [formControl]="idControl"
-                    (change)="changeOccurred()">
-                <span *ngIf="idControl.errors?.required && idControl.touched">Missing name</span>
-                <!-- <span *ngIf="idControl.errors?.pattern && idControl.touched">Name must be capitalized</span> -->
+                <input type="text" class="form-control" [formControl]="firstNameControl" placeholder="First Name*"
+                    required (change)="changeOccurred()">
+                <span *ngIf="firstNameControl.errors?.required && firstNameControl.touched">Please enter First Name</span>
+                
+            </div>
+            <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" [formControl]="lastNameControl" placeholder="Last Name*"
+                    required (change)="changeOccurred()">
+                <span *ngIf="lastNameControl.errors?.required && lastNameControl.touched">Please enter Last Name</span>
+
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" required [formControl]="idControl" (change)="changeOccurred()"
+                    placeholder="ID*">
+                <span *ngIf="idControl.errors?.required && idControl.touched">Please enter ID</span>
 
             </div>
             <div class="col-md-6 mb-3">
-                <label for="validationCustom02">Email</label>
-                <input type="text" class="form-control" id="validationCustom02" required [formControl]="emailControl"
-                    (change)="changeOccurred()">
+                <input type="text" class="form-control" required [formControl]="emailControl"
+                    (change)="changeOccurred()" placeholder="Email*">
+                    <span *ngIf="emailControl.errors?.required && emailControl.touched">Please enter email</span>
+                    <span *ngIf="emailControl.errors?.pattern && emailControl.touched">Please enter valid email</span>
+
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-3">
-                <label for="validationCustom01">Password</label>
-                <input type="password" class="form-control" id="validationCustom01" required
-                    [formControl]="passwordControl" (change)="changeOccurred()">
+                <input type="password" class="form-control" required [formControl]="passwordControl"
+                    (change)="changeOccurred()" placeholder="Password*">
+                    <span *ngIf="passwordControl.errors?.required && passwordControl.touched">Please enter password</span>
+
             </div>
             <div class="col-md-6 mb-3">
-                <label for="validationCustom02">Confirm password</label>
-                <input type="password" class="form-control" id="validationCustom02" required
-                    [formControl]="confirmPasswordControl" (change)="changeOccurred()">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="validationCustom01">First name</label>
-                <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="validationCustom02">Last name</label>
-                <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+                <input type="password" class="form-control" required [formControl]="confirmPasswordControl"
+                    (change)="changeOccurred()" placeholder="Confirm Password*">
+                    <span *ngIf="firstNameControl.errors?.required && firstNameControl.touched">Please enter password</span>
+
             </div>
         </div>
+
         <div class="form-row">
             <div class="col-md-6 mb-3">
-                <label for="validationCustom03">City</label>
-                <input type="text" class="form-control" id="validationCustom03" required>
+                <input type="text" class="form-control" [formControl]="cityControl" required placeholder="City*">
+                <span *ngIf="cityControl.errors?.required && cityControl.touched">Please enter city name</span>
             </div>
 
             <div class="col-md-3 mb-3">
-                <label for="validationCustom05">Street</label>
-                <input type="text" class="form-control" id="validationCustom05" required>
+                <input type="text" class="form-control" [formControl]="streetControl" required placeholder="Street*">
+                <span *ngIf="streetControl.errors?.required && streetControl.touched">Please enter street</span>
             </div>
         </div>
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                    Agree to terms and conditions
-                </label>
-                <div class="invalid-feedback">
-                    You must agree before submitting.
-                </div>
-            </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Submit form</button>
+        <button class="btn btn-success" type="submit" >Register</button>
     </form>
 </div>

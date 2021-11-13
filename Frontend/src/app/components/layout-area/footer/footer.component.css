@@ -3,15 +3,14 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: darkgreen;
+    background-color: rgb(10, 100, 10);
     color: white;
     height: 80px;
-  }
+  } 
 img {
     width: 100px;
     height: 80%;
     margin-top: 5px;
-    /* position: fixed; */
     float: left;
 }
 
@@ -21,4 +20,13 @@ h2 {
 }
 h5 {
     margin-top: 1em;
+}
+
+.info {
+    position: absolute;
+    right: 2em;
+    bottom: 0.1px;
+}
+svg{
+    margin-right: 0.5em;
 }

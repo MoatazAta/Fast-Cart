@@ -13,17 +13,16 @@ const orderController = require("./controllers/order-controller");
 const server = express();
 
 server.use(expressFileUpload());
-
 server.use(cors());
 server.use(express.json());
+
 server.use("/api", productsController);
 server.use("/api/auth", authController);
 server.use("/api", itemsController);
 server.use("/api", cartController);
 server.use("/api/orders", orderController);
 
-
-
+server.use("*", (req, res) => res.status(404).send("Route not found"));
 
 server.listen(3001, () => console.log("Listening..."));
 

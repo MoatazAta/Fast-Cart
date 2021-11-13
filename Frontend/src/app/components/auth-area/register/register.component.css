@@ -1,11 +1,11 @@
-/* form {
+form {
     width: 250px;
 }
 
 input {
     width: 100%;
     box-sizing: border-box;
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
 }
 
 button {
@@ -14,11 +14,25 @@ button {
 }
 
 span {
-    color: red;
-    margin: 0 20px;
-    position: absolute;
-} */
+    color: #a31919;
+    position: relative; 
+    margin-bottom: 5px;
+}
 
-.box {
+.Box {
     text-align: left;
+    height: 450px;
+}
+form{
+    margin-top: 2em;
+    width: 500px;
+    margin-left: 3em;
+
+}
+.header {
+    position: relative;
+    left: 0;
+    padding: 10px;
+    background-color: forestgreen;
+    color: white;
 }

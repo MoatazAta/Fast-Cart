@@ -68,6 +68,10 @@ export class ProductCardComponent implements OnInit {
         this.item.totalPrice = this.item.product.price * this.item.quantity;
         await this.myCartService.updateItemAsync(this.item);
     }
+
+    public handeEditProduct(){
+        
+    }
     ngOnDestroy(): void {
         this.unsubscribeMe();
     }

@@ -13,10 +13,10 @@ import store from '../redux/store';
 export class CartService {
 
     constructor(private http: HttpClient) { }
-
+ 
     public async getOpenCartByUserIdAsync(userId: string): Promise<CartModel> {
         if (store.getState().cartState.cart === null) {
-            let openCart = await this.http.get<CartModel>(environment.cartsUrl + userId).toPromise();
+            const openCart = await this.http.get<CartModel>(environment.cartsUrl + userId).toPromise();
             store.dispatch(cartDownloadedAction(openCart));
         }
         return store.getState().cartState.cart;
@@ -41,7 +41,7 @@ export class CartService {
     }
 
     public async getItemsByCartIdAsync(cartId: string): Promise<ItemModel[]> {
-        if (store.getState().itemsState.items.length === 0) {
+        if (store.getState().itemsState.items.length === 0 || !store.getState().cartState.cart.isPaid) {
             const items = await this.http.get<ItemModel[]>(environment.itemsUrl + "cart/" + cartId).toPromise();
             store.dispatch(ItemsDownloadedAction(items));
         }

@@ -1,5 +1,6 @@
 {
     "mongodb": {
-        "connectionString": ""
-    }
+        "connectionString": "mongodb://localhost:27017/OnlineShopping"
+    },
+    "jwtKey":"FastCart"
 }

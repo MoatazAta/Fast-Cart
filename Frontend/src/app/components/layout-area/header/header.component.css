@@ -43,6 +43,15 @@ img{
 }
 
 nav{
+    width: 100%;
     position: fixed;
     top: auto;
+    z-index: 2;
+    background-color: white;
+    border-bottom: 2px solid yellowgreen;
+}
+
+
+.container {
+    margin-right: 50em;
 }

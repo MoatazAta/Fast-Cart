@@ -1,14 +1,12 @@
 img {
     width: 100%;
-    width: 150px;
-    height: 150px;
+    height: 180px;
     vertical-align: middle; 
     position: relative;
     left: 0.5em;
 }
 .card {
-    height: 250px;
-    /* position: absolute; */
+    height: 300px;
     display:grid;
     grid-template-rows: 70% 30%;
 }
@@ -21,8 +19,7 @@ img {
 .qty {
     display: inline-block;
     border: 2px solid green;
-    /* margin-left: 2.5em;  */
-    /* border-radius: 10px; */
+
     width: 65%;
     height: 32px;
 }
@@ -33,7 +30,6 @@ img {
     font-size: 15px;
     font-weight: 700;
     line-height: 30px;
-    /* padding: 0 2px; */
     min-width: 39px;
     height: 28px;
     text-align: center;
@@ -100,3 +96,7 @@ input:disabled{
 .card:hover .qty{ 
 	display:inline-block;
 } 
+
+svg {
+    margin-right: 5px;
+}

@@ -1,6 +1,6 @@
 <div class="order">
     <div>
-        <div class="header">
+        <div class="header"> 
 
             <h4>Your shopping cart</h4>
             <form class="form-inline">
@@ -41,7 +41,7 @@
     </div>
 
     <!-- <app-customer-cart [orderShow]="true"></app-customer-cart> (dblclick)="autoComplete()" -->
-    <div class="box">
+    <div class="divCheckout">
         <form (submit)="addOrder()" #formInfo="ngForm">
             <h5>Shipping Details</h5>
             <label>City</label>
@@ -56,7 +56,7 @@
             <span *ngIf="streetInfo.errors?.minlength && streetInfo.touched">street minimum 2 characters</span>
 
             <label>Delivery Date</label>
-            <input type="date" name="date" [(ngModel)]="order.date" #deliveryDateInfo="ngModel" required min={{today}}>
+            <input type="date" name="date" [(ngModel)]="order.deliveryDate" #deliveryDateInfo="ngModel" required min={{today}}>
             <span *ngIf="deliveryDateInfo.errors?.required && deliveryDateInfo.touched">delivery date required</span>
 
             <h5>Payment Details</h5>
@@ -70,13 +70,13 @@
     <div class="footer">
         
         <div class="back">
-            <button type="button" class="btn btn-success">Continue Shopping</button>
+            <button type="button" class="btn btn-success" (click)="continueShopping">Continue Shopping</button>
 
         </div>
         <div class="proceed">
             <p>Estimated Total: </p> 
             <strong><small>({{items.length}} Items)</small>{{orderPrice | currency:"ILS"}}</strong>
-            <button type="button" class="btn btn-danger" [disabled]="formInfo.form.invalid" (click)="Checkout()">Checkout</button>
+            <button type="button" class="btn btn-danger" [disabled]="formInfo.form.invalid" (click)="addOrder()">Checkout</button>
 
         </div>
 

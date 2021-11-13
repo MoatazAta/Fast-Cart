@@ -1,9 +1,5 @@
 <div class="row">
-    <div class="col-md-2">
-        <div></div>
-    </div>
-
-    <div class="col-md-8">
+    <div class="col-md-9">
         <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
             <nav>
                 <button class="cat-nav active" value={{c._id}} *ngFor="let c of categories"
@@ -16,8 +12,6 @@
                 </form>
         </ul>
 
-        <!-- <a routerLink="/products/new">Add Product</a> -->
-
         <div class="row">
             <div class="col-md-2" *ngFor="let p of products">
                 <app-product-card [product]="p" [user]="user" [cart]="cart"></app-product-card>
@@ -25,14 +19,10 @@
         </div>
     </div>
 
-    <div *ngIf="!user?.isAdmin" class="col">
+    <div *ngIf="!user?.isAdmin" class="col-md-3">
         <app-shopping-cart></app-shopping-cart>
     </div>
+    <div *ngIf="user?.isAdmin" class="col-md-3">
+        <app-add-product></app-add-product>
+    </div>
 </div>
-
-
-
-
-<!-- <div>
-    <app-shopping-cart></app-shopping-cart>
-</div> -->

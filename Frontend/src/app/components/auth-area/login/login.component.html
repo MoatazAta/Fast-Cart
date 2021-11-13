@@ -1,17 +1,18 @@
 <div class="box">
 
 
-    <form (submit)="login()">
+    <form (submit)="login()" #formInfo="ngForm">
 
-            <label>Email: </label>
-            <input  type="text" name="username" [(ngModel)]="credentials.email" />
+        <label>Email* </label>
+        <input class="form-control" type="text" name="username" required [(ngModel)]="credentials.email" #emailInfo="ngModel"/>
+        <span *ngIf="emailInfo.errors?.required && emailInfo.touched">Missing email</span>
 
-            <label>Password: </label>
-            <input  type="password" name="password" [(ngModel)]="credentials.password" />
+        <label>Password* </label>
+        <input class="form-control" type="password" name="password" required [(ngModel)]="credentials.password" #passwordInfo="ngModel"/>
+        <span *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Missing password</span>
 
-        <button>Login</button>
-        <a routerLink="/register">Create Account</a>
-
+        <button class="btn btn-outline-success" [disabled]="formInfo.form.invalid">Login</button>
+        <button routerLink="/register" class="btn btn-link">Register Account</button>
 
     </form>
 

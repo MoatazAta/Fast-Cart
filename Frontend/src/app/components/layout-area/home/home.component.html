@@ -1,0 +1,33 @@
+<div class="parallax">
+    <div class="parallax-container">
+        <div class="parallax-content">
+            <div *ngIf="!user">
+                <h3>Order Online Today!</h3>
+                <h5>Join us now</h5>
+                <app-login></app-login>
+            </div>
+            <div *ngIf="user">
+                <h3>Welcome {{user.firstName}} {{user.lastName}}</h3>
+                
+                <div *ngIf="!cart?.isPaid && cart">
+                    <h5>You have open cart from <strong>{{cart.date?.toString().split('T')[0]}}</strong></h5>
+                    <button class="btn btn-success" (click)="handleResumeShopping()">Resume Shopping</button>
+                </div>
+
+                <h5 *ngIf="latestOrder && !cart">Your last purchase was on
+                    <strong>{{latestOrder.deliveryDate?.toString().split('T')[0]}}</strong>
+                </h5>
+
+                <h5 *ngIf="!cart && !latestOrder">Welcome to Fast-Cart</h5>
+
+                <button class="btn btn-success" *ngIf="cart?.isPaid || !cart" (click)="addCart()">Start
+                    Shopping</button>
+
+            </div>
+        </div>
+        <div class="info">
+            <p>Total products in FastCart: <b>{{products?.length}}</b></p>
+            <p>Total orders purchased in FastCart: <b>{{orders?.length}}</b></p>
+        </div>
+    </div>
+</div>

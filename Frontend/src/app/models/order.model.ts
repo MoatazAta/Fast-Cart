@@ -1,9 +1,11 @@
 export class OrderModel {
-    _id: string;
+    _id: string; 
     userId: string;
     cartId: string;
+    price: number;
     city: string;
     street: string;
-    date: Date;
-    creditCard: number;
+    deliveryDate: Date;
+    initDate: Date;
+    creditCard: string;
 }
