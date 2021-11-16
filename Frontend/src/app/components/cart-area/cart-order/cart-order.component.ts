@@ -9,6 +9,9 @@ import { CartService } from 'src/app/services/cart.service';
 import { NotifyService } from 'src/app/services/notify.service';
 import { OrderService } from 'src/app/services/order.service';
 import { environment } from 'src/environments/environment';
+import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-cart-order',
@@ -26,7 +29,7 @@ export class CartOrderComponent implements OnInit {
     public orderPrice = 0;
 
     constructor(private notify: NotifyService, private myCartService: CartService, private myOrderService: OrderService, private myRouter: Router) { }
-    
+
     async ngOnInit() {
         try {
             this.user = store.getState().authState.user;
@@ -36,8 +39,8 @@ export class CartOrderComponent implements OnInit {
             this.imageAddress = environment.productImagesUrl;
 
         } catch (err: any) {
-            if(err.status === 403 || err.status === 401) {
-                this.myRouter.navigateByUrl("/logout"); 
+            if (err.status === 403 || err.status === 401) {
+                this.myRouter.navigateByUrl("/logout");
                 return;
             }
             this.notify.error(err);
@@ -49,19 +52,44 @@ export class CartOrderComponent implements OnInit {
             this.order.cartId = this.cart._id;
             this.order.userId = this.user._id;
             this.order.price = this.orderPrice;
-            this.order = await this.myOrderService.addOrderAsync(this.order);
-            this.cart = await this.myCartService.cartIsPaid(this.cart);
-            this.notify.success("your order paid successfully");
-            this.myRouter.navigateByUrl("/home");
+            if (!moment().isSameOrBefore(this.order.deliveryDate, 'day')) {
+                document.getElementById("alert").innerText = "Please enter valid date";
+            }
+            else {
+                this.order = await this.myOrderService.addOrderAsync(this.order);
+                this.cart = await this.myCartService.cartIsPaid(this.cart);
+                this.notify.success("Order paid successfully- Receipt downloaded");
+                this.generateReceptionPdf();
+                this.myRouter.navigateByUrl("/home");
+            }
         } catch (err: any) {
             this.notify.error(err);
         }
     }
-     public continueShopping(){
-         this.myRouter.navigateByUrl("/products");
-     }
+    public generateReceptionPdf() {
+        let element = document.getElementById("table");
+        html2canvas(element).then((canvas) => {
+            console.log(canvas);
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const imgHeight = canvas.height * 208 / canvas.width;
+            pdf.text("Fast Cart - Receipt", 10, 10);
+            pdf.text("___________________________________________________________", 10, 15);
+            pdf.setFont('Roboto-Medium.ttf', 'normal', '500');
+            pdf.text("Purchase date: " + this.order.initDate.toString().split('T')[0], 10, 25);
+            pdf.text("Total price: " + this.order.price, 10, 33);
+            pdf.text("Delivery date: " + this.order.deliveryDate.toString().split('T')[0], 10, 41);
+            pdf.text("___________________________________________________________", 10, 46);
 
-    public async deleteItem(_id:string) {
+            pdf.addImage(imgData, 0, 55, 208, imgHeight);
+            pdf.save("reception.pdf");
+        })
+    }
+    public continueShopping() {
+        this.myRouter.navigateByUrl("/products");
+    }
+
+    public async deleteItem(_id: string) {
         try {
             await this.myCartService.deleteItemAsync(_id);
         } catch (err: any) {

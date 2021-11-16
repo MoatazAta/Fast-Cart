@@ -28,9 +28,6 @@ router.post("/register", async (request, response) => {
     try {
         const userToAdd = new UserModel(request.body);
         
-        // if (logic.validateIdAsync(userToAdd.email, userToAdd._id)) return response.status(401).send("There is someone singed-in with this ID!");
-
-        // Validate:
         const errors = await userToAdd.validateSync();
         if (errors) return response.status(400).send(errors.message);
 

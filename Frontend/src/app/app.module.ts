@@ -13,12 +13,6 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthMenuComponent } from './components/auth-area/auth-menu/auth-menu.component';
 import { HeaderComponent } from './components/layout-area/header/header.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatButtonModule } from "@angular/material/button";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatIconModule } from "@angular/material/icon";
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { AddProductComponent } from './components/products-area/add-product/add-product.component';
 import { ProductListComponent } from './components/products-area/product-list/product-list.component';
 import { ProductCardComponent } from './components/products-area/product-card/product-card.component';
@@ -67,8 +61,8 @@ import { CartOrderComponent } from './components/cart-area/cart-order/cart-order
 
     providers: [{
         provide: HTTP_INTERCEPTORS,
-        useClass: AuthInterceptor, 
-        multi: true 
+        useClass: AuthInterceptor,
+        multi: true
     }],
 
     bootstrap: [LayoutComponent]

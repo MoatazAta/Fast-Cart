@@ -20,7 +20,7 @@ img {
     display: inline-block;
     border: 2px solid green;
 
-    width: 65%;
+    width: 52%;
     height: 32px;
 }
 .qty .count {
@@ -99,4 +99,9 @@ input:disabled{
 
 svg {
     margin-right: 5px;
+}
+
+#cartFooter {
+    position: fixed;
+    bottom: auto;
 }

@@ -1,6 +1,5 @@
 const express = require("express");
 const logic = require("../business-logic/cart-logic");
-const ItemModel = require("../models/item-model");
 const CartModel = require("../models/cart-model");
 const verifyLoggedIn = require("../middleware/verify-logged-in");
 
@@ -27,10 +26,19 @@ router.get("/carts/:userId", verifyLoggedIn, async (request, response) => {
     }
 });
 
-router.post("/carts", verifyLoggedIn, async (request, response) => {
+router.get("/carts/last-cart/:userId", verifyLoggedIn, async (request, response) => {
     try {
-        const today = new Date().toISOString().slice(0, 10);
-        request.body.date = today;
+        const _id = request.params.userId;
+        const latestCart = await logic.getLatestCartAsync(_id);
+        response.json(latestCart);
+    }
+    catch (err) {
+        response.status(500).send(err.message);
+    }
+});
+
+router.post("/carts", verifyLoggedIn, async (request, response) => {
+    try {     
         const cart = new CartModel(request.body);
         const addedCart = await logic.addCartAsync(cart);
         response.status(201).json(addedCart);
@@ -40,7 +48,6 @@ router.post("/carts", verifyLoggedIn, async (request, response) => {
     }
 });
 
-// PATCH
 router.patch("/carts/:_id", verifyLoggedIn, async (request, response) => {
     try {
         const _id = request.params._id;

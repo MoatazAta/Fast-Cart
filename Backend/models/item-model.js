@@ -2,13 +2,25 @@ const mongoose = require("mongoose");
   
 const ItemSchema = mongoose.Schema({
 
-    productId: mongoose.Schema.Types.ObjectId,
+    productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "product ID required"],
+    },
 
-    quantity: Number,
+    quantity: {
+        type: Number,
+        required: [true, "quantity required"],
+    },
 
-    totalPrice: Number,
+    totalPrice: {
+        type: Number,
+        required: [true, "total price required"],
+    },
 
-    cartId: mongoose.Schema.Types.ObjectId
+    cartId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "cart ID required"],
+    },
 
  
 }, { versionKey: false, toJSON: { virtuals: true }, id: false });

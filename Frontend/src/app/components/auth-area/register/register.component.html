@@ -4,47 +4,9 @@
 
     </div>
 
-    <!-- <form [formGroup]="productForm" (submit)="register()">
-
-        <label>ID: </label>
-        <input type="text" [formControl]="idControl" (change)="changeOccurred()">
-        <span *ngIf="idControl.errors?.required && idControl.touched">Missing name</span>
-        <span *ngIf="idControl.errors?.pattern && idControl.touched">Name must be capitalized</span>
-
-        <label>Email: </label>
-        <input type="text" [formControl]="emailControl" (change)="changeOccurred()">
-        <span *ngIf="emailControl.invalid && emailControl.touched">Missing email</span>
-
-        <label>Password: </label>
-        <input type="password" [formControl]="passwordControl" (change)="changeOccurred()">
-        <span *ngIf="passwordControl.invalid && passwordControl.touched">Missing password</span>
-
-        <label>Confirm password: </label>
-        <input type="password" [formControl]="confirmPasswordControl" (change)="changeOccurred()">
-        <span *ngIf="confirmPasswordControl.invalid && confirmPasswordControl.touched">Missing password</span>
-
-        <label>city: </label>
-        <input type="text" [formControl]="cityControl" (change)="changeOccurred()">
-        <span *ngIf="cityControl.errors?.required && cityControl.touched">Missing city</span>
-
-        <label>street: </label>
-        <input type="text" [formControl]="streetControl" (change)="changeOccurred()">
-        <span *ngIf="streetControl.errors?.required && streetControl.touched">Missing street</span>
-
-        <label>First Name: </label>
-        <input type="text" [formControl]="firstNameControl" (change)="changeOccurred()">
-        <span *ngIf="firstNameControl.errors?.required && firstNameControl.touched">Missing first name</span>
-
-        <label>Last Name: </label>
-        <input type="text" [formControl]="lastNameControl" (change)="changeOccurred()">
-        <span *ngIf="lastNameControl.errors?.required && lastNameControl.touched">Missing last name</span>
-
-        <button>next</button>
-    </form> -->
-
     <form [formGroup]="productForm" (submit)="register()" #formInfo="ngForm">
         <p>Required fields are marked with *</p>
-        <div class="form-row">
+        <div class="form-row"> 
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control" [formControl]="firstNameControl" placeholder="First Name*"
                     required (change)="changeOccurred()">
@@ -78,6 +40,8 @@
                 <input type="password" class="form-control" required [formControl]="passwordControl"
                     (change)="changeOccurred()" placeholder="Password*">
                     <span *ngIf="passwordControl.errors?.required && passwordControl.touched">Please enter password</span>
+                    <span *ngIf="passwordControl.errors?.pattern && passwordControl.touched">Password too short</span>
+
 
             </div>
             <div class="col-md-6 mb-3">
@@ -99,6 +63,7 @@
                 <span *ngIf="streetControl.errors?.required && streetControl.touched">Please enter street</span>
             </div>
         </div>
-        <button class="btn btn-success" type="submit" >Register</button>
+        <span id="alert"></span>
+        <button class="btn btn-success" type="submit" [disabled]="formInfo.form.invalid">Register</button>
     </form>
 </div>

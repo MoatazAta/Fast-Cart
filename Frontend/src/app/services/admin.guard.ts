@@ -13,12 +13,11 @@ export class AdminGuard implements CanActivate {
 
     public canActivate(): boolean {
 
-        if (store.getState().authState.user?.isAdmin)
-            return true; 
+        if (store.getState().authState.user?.isAdmin) return true;
 
         this.notify.error("You are not admin");
         this.myRouter.navigateByUrl("/home");
-        return false; 
+        return false;
     }
 
 }

@@ -6,7 +6,7 @@ import { Notyf } from 'notyf';
 })
 export class NotifyService {
 
-    private notification = new Notyf({ duration: 4000, position: { x: "left", y: "top" } });
+    private notification = new Notyf({ duration: 5000, position: { x: "center", y: "top" } });
 
     public success(message: string): void {
         this.notification.success(message); // Green

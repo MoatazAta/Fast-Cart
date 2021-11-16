@@ -2,9 +2,15 @@ const mongoose = require("mongoose");
 
 const CartSchema = mongoose.Schema({
 
-    userId: String,
-
-    date: Date,
+    userId:{
+        type: String,
+        require: [true, "user id required"]
+    },
+    date: {
+        type: Date,
+        required: [true, "cart date required"],
+        default: Date.now
+    },
 
     isPaid: {
         type: Boolean,

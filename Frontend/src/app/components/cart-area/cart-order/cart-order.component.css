@@ -1,7 +1,22 @@
+.mybuttonoverlap{
+    display: none;
+}
+
+.trbody:hover .mybuttonoverlap{ 
+	display: inline-block;
+}
+
+h3 {
+    color:rgb(18, 196, 18);
+}
+
 .order{
-    height: 130%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     position: relative;
+    flex:1;
 }
 div {
     width: 90%;
@@ -18,30 +33,31 @@ form {
 }
 
 input, label {
+    position: relative;
 	width: 70%;
     box-sizing: border-box;
     height: 30px;
+    
+
 }
 input {
-    margin-bottom: 8px;
+    margin-bottom: 15px;
 }
 
 .divCheckout {
     margin-top: 1em;
     width: 50%;
-    /* position: fixed; */
-    border: 2px solid black;
-
+    border: 1px solid black;
+    margin-bottom: 10em;
+    margin-left: 10em;
 }
 
-h4 {
-    color:green;
-    float:left;
-}
+
 
 span {
     display: inline-block;
     margin-left: 10px;
+    margin-bottom: 10px;
     color: #bf2717;
 }
 
@@ -61,11 +77,34 @@ table {
     padding: 8px;
 
   }
+
 .header {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    
+    display: flex;
+    flex-direction: row;
+    top: auto;
+    position: relative;
+    background-color: white;
+    border-bottom: 2px solid rgb(18, 196, 18);
+
 }
+
+h4 {
+    margin-top: 12px;
+    color:rgb(18, 196, 18);
+    position: absolute;
+    left: 0;
+}
+
+#search {
+    height: 100%;
+    width: 400px;
+}
+
+.form-inline {
+    background-color: white;
+    position: relative;
+}
+
 .footer {
     position: fixed;
     left: 0;

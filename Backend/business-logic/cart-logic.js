@@ -1,6 +1,4 @@
-const dal = require("../data-access-layer/dal");
 const ProductModel = require("../models/product-model");
-const ItemModel = require("../models/item-model");
 const CartModel = require("../models/cart-model");
 
 function getAllCartsAsync() {
@@ -10,10 +8,10 @@ function getAllCartsAsync() {
 function getOpenCartByUserIdAsync(userId, isPaid) {
     return CartModel.findOne({ userId, isPaid }).exec();
 }
-
-function getLatestCartByUserIdAsync(userId, isPaid) {
-    return CartModel.find({ userId, isPaid }).exec();
+function getLatestCartAsync(userId) {
+    return CartModel.findOne({ userId }).sort({ date: 'desc' }).exec();
 }
+
 
 function addCartAsync(cart) {
     return cart.save();
@@ -29,7 +27,7 @@ function deleteItemAsync(_id){
 module.exports = {
     getAllCartsAsync,
     getOpenCartByUserIdAsync,
-    getLatestCartByUserIdAsync,
+    getLatestCartAsync,
     addCartAsync,
     updateCartPaidAsync,
     deleteItemAsync

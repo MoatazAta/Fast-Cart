@@ -1,10 +1,8 @@
-const dal = require("../data-access-layer/dal");
 const cryptoHelper = require("../helpers/crypto-helper");
 const UserModel = require("../models/user-model");
-const CredentialsModel = require("../models/credentials-model");
 
 
-function validateIdAsync(email, id) {
+function validateIdAsync(id) {
     return UserModel.findOne({ id }).exec();
 }
 

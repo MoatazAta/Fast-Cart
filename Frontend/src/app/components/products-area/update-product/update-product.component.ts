@@ -17,8 +17,6 @@ export class UpdateProductComponent implements OnInit {
     public categories: CategoryModel[];
     constructor(private myActivatedRoute: ActivatedRoute, private myProductsService: ProductsService, private myRouter: Router, private notify: NotifyService) { }
 
-
-
     public setImage(args: Event): void {
         this.product.image = (args.target as HTMLInputElement).files;
     }
@@ -36,8 +34,8 @@ export class UpdateProductComponent implements OnInit {
                 return;
             }
             this.notify.error(err.message);
-        }
-    }
+        } 
+    } 
 
     public async update() {
         try {

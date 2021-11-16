@@ -3,7 +3,6 @@ const productsLogic = require("../business-logic/products-logic");
 const ProductModel = require("../models/product-model");
 const path = require("path");
 const fs = require('fs');
-const expressFileUpload = require("express-fileupload");
 const router = express.Router();
 const verifyLoggedIn = require("../middleware/verify-logged-in");
 const verifyAdmin = require("../middleware/verify-admin");
@@ -17,7 +16,7 @@ router.get("/products", async (request, response) => {
     }
 });
 
-router.get("/categories",verifyLoggedIn, async (request, response) => {
+router.get("/categories", verifyLoggedIn, async (request, response) => {
     try {
         const categories = await productsLogic.getAllCategoriesAsync();
         response.json(categories);
@@ -26,8 +25,7 @@ router.get("/categories",verifyLoggedIn, async (request, response) => {
     }
 });
 
-//GET One Product
-router.get("/products/:id", async (request, response) => {
+router.get("/products/:id", verifyLoggedIn, async (request, response) => {
     try {
         const id = request.params.id;
         const product = await productsLogic.getOneProductAsync(id);
@@ -38,7 +36,7 @@ router.get("/products/:id", async (request, response) => {
     }
 });
 
-router.get("/products/products-per-category/:categoryId", verifyLoggedIn,async (request, response) => {
+router.get("/products/products-per-category/:categoryId", verifyLoggedIn, async (request, response) => {
     try {
         const categoryId = request.params.categoryId;
         const products = await productsLogic.getProductsByCategoryAsync(categoryId);
@@ -48,15 +46,14 @@ router.get("/products/products-per-category/:categoryId", verifyLoggedIn,async (
     }
 });
 
-//POST
-router.post("/products",verifyAdmin, async (request, response) => {
+router.post("/products", verifyAdmin, async (request, response) => {
     try {
         if (!request.files.image) {
             response.status(400).send("No image sent.");
             return;
         }
         const product = new ProductModel(request.body);
-        // Validate: 
+
         const errors = await product.validateSync();
         if (errors) return response.status(400).send(errors.message);
 
@@ -66,8 +63,8 @@ router.post("/products",verifyAdmin, async (request, response) => {
         response.status(500).send(err.message);
     }
 });
- 
-router.delete("/products/:id",verifyAdmin, async (request, response) => {
+
+router.delete("/products/:id", verifyAdmin, async (request, response) => {
     try {
         const id = request.params.id;
         const deletedProduct = await productsLogic.deleteProductAsync(id);
@@ -80,13 +77,12 @@ router.delete("/products/:id",verifyAdmin, async (request, response) => {
 
 
 
-router.patch("/products/:_id", async (request, response) => {
+router.patch("/products/:_id", verifyAdmin, async (request, response) => {
     try {
         const _id = request.params._id;
         request.body._id = _id;
         const productToUpdate = new ProductModel(request.body);
 
-        // Validate: 
         const errors = await productToUpdate.validateSync();
         if (errors) return response.status(400).send(errors.message);
 

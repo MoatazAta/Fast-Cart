@@ -14,13 +14,13 @@ import { NotifyService } from 'src/app/services/notify.service';
 export class RegisterComponent {
 
     private user = new UserModel();
-    
+
     constructor(private myAuthService: AuthService, private myRouter: Router, private notify: NotifyService) { }
 
     //Controls
     public idControl = new FormControl(null, [Validators.required]);
     public emailControl = new FormControl(null, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]);
-    public passwordControl = new FormControl(null, [Validators.required]);
+    public passwordControl = new FormControl(null, [Validators.required, Validators.pattern("^.{4,}$")]);
     public confirmPasswordControl = new FormControl(null, [Validators.required]);
     public cityControl = new FormControl(null, [Validators.required]);
     public streetControl = new FormControl(null, [Validators.required]);
@@ -52,15 +52,17 @@ export class RegisterComponent {
             this.user.street = this.streetControl.value;
             this.user.firstName = this.firstNameControl.value;
             this.user.lastName = this.lastNameControl.value;
-
-            await this.myAuthService.register(this.user);
-            IncompleteGuard.canLeave = true;
-            this.notify.success("You are registered");
-            this.myRouter.navigateByUrl("/login");
-
+            if (this.passwordControl.value !== this.confirmPasswordControl.value) {
+                document.getElementById("alert").innerText = "passwords are not machs";
+            }
+            else {
+                await this.myAuthService.register(this.user);
+                IncompleteGuard.canLeave = true;
+                this.notify.success("You are registered");
+                this.myRouter.navigateByUrl("/login");
+            }
         }
         catch (err: any) {
-            
             this.notify.error(err);
         }
     }

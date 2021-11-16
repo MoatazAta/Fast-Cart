@@ -5,7 +5,7 @@ import { CartModel } from '../models/cart.model';
 import { ItemModel } from '../models/item.model';
 import { ItemAddedAction, ItemDeletedAction, ItemsDownloadedAction, ItemUpdatedAction } from '../redux/cart-items-state';
 import { cartAddedAction, cartDownloadedAction, cartPaidAction } from '../redux/cart-state';
-import store from '../redux/store';
+import store from '../redux/store'; 
 
 @Injectable({
     providedIn: 'root'
@@ -15,9 +15,12 @@ export class CartService {
     constructor(private http: HttpClient) { }
  
     public async getOpenCartByUserIdAsync(userId: string): Promise<CartModel> {
-        if (store.getState().cartState.cart === null) {
-            const openCart = await this.http.get<CartModel>(environment.cartsUrl + userId).toPromise();
-            store.dispatch(cartDownloadedAction(openCart));
+        if (!store.getState().cartState.cart) {
+            let cart = await this.http.get<CartModel>(environment.cartsUrl + userId).toPromise();
+            if(!cart){
+                cart = await this.http.get<CartModel>(environment.cartsUrl + "last-cart/" + userId).toPromise();
+            }
+            store.dispatch(cartDownloadedAction(cart));
         }
         return store.getState().cartState.cart;
     }

@@ -60,7 +60,6 @@ router.delete("/items/:_id", verifyLoggedIn, async (request, response) => {
     }
 });
 
-// PATCH
 router.patch("/items/:_id", verifyLoggedIn, async (request, response) => {
     try {
         const _id = request.params._id;

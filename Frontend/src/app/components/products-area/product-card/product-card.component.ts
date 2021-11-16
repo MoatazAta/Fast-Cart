@@ -26,7 +26,7 @@ export class ProductCardComponent implements OnInit {
     public imageAddress: string;
     public item : ItemModel = null;
     private unsubscribeMe: Unsubscribe;
-
+    public weight: Boolean = false;
     constructor(private myCartService: CartService, private notify: NotifyService) { }
     
     async ngOnInit() {
@@ -37,6 +37,9 @@ export class ProductCardComponent implements OnInit {
             });
             this.item = store.getState().itemsState.items.find(i => i.product._id === this.product._id);
             this.imageAddress = environment.productImagesUrl + this.product.imageName;  
+            if(this.product.category?.name === "Fresh Produce"){
+                this.weight = true;
+            }
 
         } catch (err: any) {
             this.notify.error(err.message);
@@ -61,7 +64,7 @@ export class ProductCardComponent implements OnInit {
 
     public async handleMinus() {
         this.item.quantity = this.item.quantity - 1;
-        if (this.item.quantity === 0) {
+        if (this.item.quantity <= 0) {
             await this.myCartService.deleteItemAsync(this.item._id);
             return;
         }

@@ -31,8 +31,8 @@ router.post("/", verifyLoggedIn, async (request, response) => {
     try {
         const order = new OrderModel(request.body);
         // Validate: 
-        // const errors = await product.validateSync();
-        // if(errors) return response.status(400).send(errors.message);
+        const errors = await order.validateSync();
+        if(errors) return response.status(400).send(errors.message);
 
         const addedOrder = await logic.addOrderAsync(order);
         response.status(201).json(addedOrder);

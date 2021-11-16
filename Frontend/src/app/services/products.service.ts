@@ -56,7 +56,6 @@ export class ProductsService {
         myFormData.append("categoryId", product.categoryId);
         myFormData.append("name", product.name);
         myFormData.append("price", product.price.toString());
-
         if(product.image) myFormData.append("image", product.image.item(0));
 
         const updatedProduct = await this.http.patch<ProductModel>(environment.productsUrl + product._id, myFormData).toPromise();

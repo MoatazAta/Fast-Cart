@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, "Password required"],
-        minlength: [4, "Password must be minimum three chars."]
+        minlength: [4, "Password must be minimum 4 chars."]
     },
     city: {
         type: String,

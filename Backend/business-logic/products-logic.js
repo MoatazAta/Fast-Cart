@@ -1,4 +1,3 @@
-const dal = require("../data-access-layer/dal");
 const ProductModel = require("../models/product-model");
 const CategoryModel = require("../models/category-model");
 const path = require("path");
@@ -36,13 +35,8 @@ function deleteProductAsync(_id) {
 }
 
 
-// Update existing product (partial or full):
 async function updateProductAsync(product, newImage) {
     if (newImage) {
-        // product.imageName = currentImage;
-
-       // let fullPath = path.join("./images/", currentImageName);
-        // deleteFile(fullPath); 
         const extension = newImage.name.substr(newImage.name.lastIndexOf("."));
         const newFileName = uuid.v4() + extension;
         product.imageName = newFileName;

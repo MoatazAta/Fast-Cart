@@ -1,8 +1,6 @@
-const dal = require("../data-access-layer/dal");
-const ProductModel = require("../models/product-model");
 const ItemModel = require("../models/item-model");
 
-function getAllItemsAsync(){
+function getAllItemsAsync(){ 
     return ItemModel.find().populate(" product ").exec();
 }
  

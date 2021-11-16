@@ -8,7 +8,7 @@ function hash(plainText) {
 }
 
 function getNewToken(payload) {
-    return jwt.sign({ payload }, global.config.jwtKey, { expiresIn: "30m" });
+    return jwt.sign({ payload }, global.config.jwtKey, { expiresIn: "24h" });
 }
 
 module.exports = {

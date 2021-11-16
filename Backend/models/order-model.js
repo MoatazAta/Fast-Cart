@@ -17,12 +17,12 @@ const OrderSchema = mongoose.Schema({
     },
     city: {
         type: String,
-        minLength: [3, "city must be more than 3 chars"],
+        minLength: [2, "city must be more than 2 chars"],
         required: [true, "city required"]
     },
     street: {
         type: String,
-        minLength: [3, "street must be more than 3 chars"],
+        minLength: [2, "street must be more than 2 chars"],
         required: [true, "street required"]
     },
     deliveryDate: {

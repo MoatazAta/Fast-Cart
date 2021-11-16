@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const ProductSchema = mongoose.Schema({
 
-    categoryId: mongoose.Schema.Types.ObjectId,
+    categoryId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "category ID required"],
+    },
 
     name: {
         type: String,

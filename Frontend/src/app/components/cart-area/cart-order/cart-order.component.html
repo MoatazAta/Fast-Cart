@@ -1,37 +1,34 @@
 <div class="order">
     <div>
-        <div class="header"> 
-
+        <div class="header">
             <h4>Your shopping cart</h4>
-            <form class="form-inline">
-                <input class="form-control mr-sm-0" name="search" type="search" placeholder="Search in cart" (input)="searchProducts($event)">
-                <button class="btn btn-outline-success my-0 my-sm" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
-                        width="12" height="12" fill="currentColor" class="bi bi-search" viewBox="0 0 12 12">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg></button>
+            <form class="form-inline my-2 my-lg-0">
+                <input id="search" class="form-control mr-1-sm-4" type="search" (input)="searchProducts($event)"
+                    placeholder="Search items in your cart" aria-label="Search">
             </form>
         </div>
         <br>
-        <div>
-            <table>
+        <div id="content" #content>
+            <table id="table">
                 <thead>
                     <tr>
                         <th></th>
                         <th>Quantity</th>
+                        <th></th>
                         <th>Product name</th>
                         <th>Unit price</th>
                         <th>Price</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let i of items">
+                    <h3 *ngIf="items.length === 0">There are no items to show</h3>
+                    <tr *ngFor="let i of items" class="trbody">
                         <td><button type="button" class="mybuttonoverlap btn btn-danger" value={{i._id}}
                                 (click)="deleteItem(i._id)">x</button></td>
                         <td>{{i.quantity}}</td>
                         <td> <img src='http://localhost:3001/api/products/images/{{i.product.imageName}}' width="40"
-                                height="40" alt={{i.product._id}}>
-                            {{i.product.name}}</td>
+                                height="40" alt={{i.product._id}}></td>
+                        <td> {{i.product.name}}</td>
                         <td><strong>{{i.product.price | currency:'ILS'}}</strong></td>
                         <td><strong>{{i.totalPrice | currency:'ILS'}}</strong></td>
                     </tr>
@@ -40,45 +37,44 @@
         </div>
     </div>
 
-    <!-- <app-customer-cart [orderShow]="true"></app-customer-cart> (dblclick)="autoComplete()" -->
     <div class="divCheckout">
         <form (submit)="addOrder()" #formInfo="ngForm">
             <h5>Shipping Details</h5>
             <label>City</label>
-            <input type="text" name="city" [(ngModel)]="order.city" required #cityInfo="ngModel" minlength="2">
-            <span *ngIf="cityInfo.errors?.required && cityInfo.touched">city required</span>
+            <input  type="text" name="city" [(ngModel)]="order.city" required #cityInfo="ngModel" minlength="2">
+            <span *ngIf="cityInfo.errors?.required && cityInfo.touched">Please enter city</span>
             <span *ngIf="cityInfo.errors?.minlength && cityInfo.touched">city minimum 2 characters</span>
 
             <label>street</label>
-            <input #streetBox="ngModel" type="text" name="street" [(ngModel)]="order.street" #streetInfo="ngModel"
+            <input  #streetBox="ngModel" type="text" name="street" [(ngModel)]="order.street" #streetInfo="ngModel"
                 required minlength="2">
-            <span *ngIf="streetInfo.errors?.required && streetInfo.touched">street required</span>
+            <span *ngIf="streetInfo.errors?.required && streetInfo.touched">Please enter street</span>
             <span *ngIf="streetInfo.errors?.minlength && streetInfo.touched">street minimum 2 characters</span>
 
             <label>Delivery Date</label>
-            <input type="date" name="date" [(ngModel)]="order.deliveryDate" #deliveryDateInfo="ngModel" required min={{today}}>
-            <span *ngIf="deliveryDateInfo.errors?.required && deliveryDateInfo.touched">delivery date required</span>
+            <input  type="date" name="date" [(ngModel)]="order.deliveryDate" #deliveryDateInfo="ngModel" required
+                min={{today}}>
+            <span *ngIf="deliveryDateInfo.errors?.required && deliveryDateInfo.touched">Please enter delivery date</span>
+            <span id="alert"></span>
 
             <h5>Payment Details</h5>
             <label>Credit card</label>
-            <input type="text" name="creditCard" [(ngModel)]="order.creditCard" #creditCardInfo="ngModel" required>
-            <span *ngIf="creditCardInfo.errors?.required && creditCardInfo.touched">credit card required</span>
+            <input  type="text" name="creditCard" [(ngModel)]="order.creditCard" #creditCardInfo="ngModel" required>
+            <span *ngIf="creditCardInfo.errors?.required && creditCardInfo.touched">Please enter credit card</span>
             <span *ngIf="creditCardInfo.errors?.pattern && creditCardInfo.touched">something wrong!</span>
         </form>
     </div>
 
     <div class="footer">
-        
         <div class="back">
-            <button type="button" class="btn btn-success" (click)="continueShopping">Continue Shopping</button>
-
+            <button class="btn btn-success" (click)="continueShopping()">Continue Shopping</button>
         </div>
         <div class="proceed">
-            <p>Estimated Total: </p> 
+            <p>Estimated Total: </p>
             <strong><small>({{items.length}} Items)</small>{{orderPrice | currency:"ILS"}}</strong>
-            <button type="button" class="btn btn-danger" [disabled]="formInfo.form.invalid" (click)="addOrder()">Checkout</button>
-
+            <button class="btn btn-danger" [disabled]="formInfo.form.invalid" (click)="addOrder()">Checkout</button>
         </div>
 
     </div>
+
 </div>

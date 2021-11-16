@@ -19,7 +19,7 @@ import { Unsubscribe } from 'redux';
 export class HomeComponent implements OnInit {
     public products: ProductModel[] = [];
     public user: UserModel = store.getState().authState.user;
-    public cart: CartModel = store.getState().cartState.cart;
+    public cart: any | CartModel = store.getState().cartState.cart;
     public latestOrder: OrderModel;
     public orders: OrderModel[] = [];
 
@@ -32,13 +32,17 @@ export class HomeComponent implements OnInit {
         try {
             this.unsubscribeMe = store.subscribe(async () => {
                 this.user = store.getState().authState.user;
+
                 if (this.user?.isAdmin) {
                     this.myRouter.navigateByUrl("/products");
                     return;
                 }
                 if (this.user) {
                     try {
+                        this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user?._id);
                         this.latestOrder = await this.myOrderService.getLatestOrderAsync(this.user?._id);
+                        console.log("home-sub:", this.cart?._id);
+
                     } catch (err: any) {
                         if (err.status === 403 || err.status === 401) {
                             this.myRouter.navigateByUrl("/logout");
@@ -53,9 +57,10 @@ export class HomeComponent implements OnInit {
                 return;
             }
             if (this.user) {
- 
+                // alert("")
                 this.latestOrder = await this.myOrderService.getLatestOrderAsync(this.user?._id);
                 this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user?._id);
+                console.log("home-on:", this.cart?._id);
             }
 
             this.orders = await this.myOrderService.getAllOrdersAsync();
