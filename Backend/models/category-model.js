@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const CategorySchema = mongoose.Schema({
-    // _id
     name: String,
 }, {
     versionKey: false,

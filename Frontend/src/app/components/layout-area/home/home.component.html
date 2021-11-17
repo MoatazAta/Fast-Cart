@@ -15,7 +15,7 @@
                 </div>
 
                 <h5 *ngIf="latestOrder && cart?.isPaid">Your last purchase was on
-                    <strong>{{latestOrder.deliveryDate?.toString().split('T')[0]}}</strong>
+                    <strong>{{latestOrder.initDate.toString().split('T')[0]}}</strong>
                 </h5>
 
                 <h5 *ngIf="!cart?.isPaid && !latestOrder && !cart">Welcome to Fast-Cart</h5>

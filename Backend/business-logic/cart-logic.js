@@ -8,6 +8,7 @@ function getAllCartsAsync() {
 function getOpenCartByUserIdAsync(userId, isPaid) {
     return CartModel.findOne({ userId, isPaid }).exec();
 }
+
 function getLatestCartAsync(userId) {
     return CartModel.findOne({ userId }).sort({ date: 'desc' }).exec();
 }

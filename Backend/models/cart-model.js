@@ -10,7 +10,7 @@ const CartSchema = mongoose.Schema({
         type: Date,
         required: [true, "cart date required"],
         default: Date.now
-    },
+    }, 
 
     isPaid: {
         type: Boolean,
