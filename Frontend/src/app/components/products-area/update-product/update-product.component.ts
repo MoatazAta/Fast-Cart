@@ -12,7 +12,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class UpdateProductComponent implements OnInit {
 
-    public product = new ProductModel();
+    public product = new ProductModel(); 
 
     public categories: CategoryModel[];
     constructor(private myActivatedRoute: ActivatedRoute, private myProductsService: ProductsService, private myRouter: Router, private notify: NotifyService) { }
@@ -26,7 +26,6 @@ export class UpdateProductComponent implements OnInit {
             this.product._id = this.myActivatedRoute.snapshot.params.id;
             this.product = await this.myProductsService.getOneProductAsync(this.product._id);
             this.categories = await this.myProductsService.getAllCategoriesAsync();
-
         }
         catch (err: any) {
             if (err.status === 403 || err.status === 401) {

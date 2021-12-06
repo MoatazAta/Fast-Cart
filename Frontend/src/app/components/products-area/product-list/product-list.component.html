@@ -1,31 +1,38 @@
-<div *ngIf="products.length === 0" class="spinner-border text-success" role="status">
-    <span class="sr-only">Loading...</span>
-</div>
-<div class="row">
-    <div class="col-md-9">
-        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+<div class="shopping-area">
+    <div class="list-container">
+        <div class="header">
+
+            <div class="input-group mb-3"> <input type="search" class="form-control" (input)="searchProducts($event)"
+                    placeholder="Search in Fast Cart">
+                <div class="input-group-append"><button class="btn btn-success"><i class="fas fa-search"></i><svg
+                            xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 22 22">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg></button></div>
+            </div>
+
             <nav>
                 <button class="cat-nav active" value={{c._id}} *ngFor="let c of categories"
                     (click)="showProducts($event)">{{c.name}}</button>
             </nav>
-                <form class="form-inline mr-sm-3 my-lg-0">
-                    <input class="form-control mr-sm-6" name="search" type="search" placeholder="Search in FastCart"
-                        (input)="searchProducts($event)">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-        </ul>
+        </div>
 
-        <div class="row">
-            <div class="col-md-2" *ngFor="let p of products">
+        <div class="cards-container">
+            <div *ngIf="!products" class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div *ngFor="let p of products">
                 <app-product-card [product]="p" [user]="user" [cart]="cart"></app-product-card>
             </div>
         </div>
     </div>
-
-    <div *ngIf="!user?.isAdmin" class="col-md-3">
-        <app-shopping-cart></app-shopping-cart>
-    </div>
-    <div *ngIf="user?.isAdmin" class="col-md-3">
-        <app-add-product></app-add-product>
+    <div class="aside">
+        <div *ngIf="!user?.isAdmin" class="col-md-3">
+            <app-shopping-cart></app-shopping-cart>
+        </div>
+        <div *ngIf="user?.isAdmin" class="col-md-3">
+            <app-add-product></app-add-product>
+        </div>
     </div>
 </div>

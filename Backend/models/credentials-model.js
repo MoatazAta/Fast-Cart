@@ -8,7 +8,7 @@ const CredentialsSchema = mongoose.Schema({
     password:{
         type: String,
         required: [true, "Password required"],
-        minlength: [4, "Password must be minimum three chars."]
+        
     }
 }, { versionKey: false });
 

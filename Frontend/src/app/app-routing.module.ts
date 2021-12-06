@@ -13,10 +13,10 @@ import { AdminGuard } from './services/admin.guard';
 import { AuthGuard } from './services/auth.guard';
 import { IncompleteGuard } from './services/incomplete.guard';
 
-const routes: Routes = [ 
+const routes: Routes = [
     { path: "home", component: HomeComponent },
 
-    { path: "register", component: RegisterComponent },
+    { path: "register", canDeactivate: [IncompleteGuard], component: RegisterComponent },
     { path: "login", component: LoginComponent },
     { path: "logout", canActivate: [AuthGuard], component: LogoutComponent },
 
@@ -26,8 +26,8 @@ const routes: Routes = [
     { path: "order", canActivate: [AuthGuard], canDeactivate: [IncompleteGuard], component: CartOrderComponent },
 
 
-    { path: "", redirectTo: "/home", pathMatch: "full" }, 
-    { path: "**", component: PageNotFoundComponent } 
+    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "**", component: PageNotFoundComponent }
 ];
 
 @NgModule({

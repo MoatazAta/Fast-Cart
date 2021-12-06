@@ -6,7 +6,7 @@ import store from 'src/app/redux/store';
 import { CartService } from 'src/app/services/cart.service';
 import { NotifyService } from 'src/app/services/notify.service';
 
-@Component({
+@Component({ 
     selector: 'app-shopping-cart',
     templateUrl: './shopping-cart.component.html',
     styleUrls: ['./shopping-cart.component.css']
@@ -36,4 +36,5 @@ export class ShoppingCartComponent implements OnInit {
             this.notify.error(err.message);
         }
     }
+    
 }

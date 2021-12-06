@@ -4,7 +4,7 @@
 
 .trbody:hover .mybuttonoverlap{ 
 	display: inline-block;
-}
+} 
 
 h3 {
     color:rgb(18, 196, 18);
@@ -14,35 +14,32 @@ h3 {
     width: 100%;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; 
     position: relative;
     flex:1;
 }
-div {
+.order-table {
     width: 90%;
     margin: auto;
     text-align: center;
 }
 
-form {
-    width: 65%;
-    margin: auto;
+.divCheckout form {
+    width: 100%;
     box-sizing: border-box;
     padding: 10px;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: left;    
 }
 
-input, label {
-    position: relative;
-	width: 70%;
-    box-sizing: border-box;
-    height: 30px;
-    
+.form-group {
+    width: 100%;
+    font-size: large;
+    font-weight: bolder;  
+}
 
-}
-input {
-    margin-bottom: 15px;
-}
 
 .divCheckout {
     margin-top: 1em;
@@ -50,15 +47,24 @@ input {
     border: 1px solid black;
     margin-bottom: 10em;
     margin-left: 10em;
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    width: 83%;
+    align-content: left;
+}
+
+.divCheckout > img {
+    height: auto;
 }
 
 
 
 span {
-    display: inline-block;
-    margin-left: 10px;
+    display: flex;
+    width: 100%;
     margin-bottom: 10px;
     color: #bf2717;
+    font-weight: bold;
 }
 
 h5 {
@@ -70,9 +76,8 @@ table {
     width: 100%;
   }
   
-  td, th {
+td, th {
     border-bottom: 1px solid black;
-
     text-align: center;
     padding: 8px;
 
@@ -85,14 +90,12 @@ table {
     position: relative;
     background-color: white;
     border-bottom: 2px solid rgb(18, 196, 18);
-
+    padding: 1em;
 }
 
-h4 {
-    margin-top: 12px;
+.header h4 {
     color:rgb(18, 196, 18);
-    position: absolute;
-    left: 0;
+    margin-top: 0.5em;
 }
 
 #search {
@@ -103,6 +106,9 @@ h4 {
 .form-inline {
     background-color: white;
     position: relative;
+    margin-left: 4em;
+    margin-top: 2em;
+    width: 70%;
 }
 
 .footer {
@@ -115,12 +121,10 @@ h4 {
     height: 80px;
     z-index: 2;
 
-
 }
 .proceed {
     position: absolute;
     display: flex;
-    
     width:25%;
     bottom: 10px;
     right: 0;
@@ -135,4 +139,16 @@ h4 {
     left: 0;
 }
   
- 
+@media screen and (max-width: 1400px) {
+
+    .divCheckout {
+        margin-top: 1em;
+        width: 80%;
+        border: 1px solid black;
+        margin-bottom: 10em;
+        margin-left: 10em;
+        display: flex;
+        flex-direction: column;
+        align-content: left;
+    }
+}

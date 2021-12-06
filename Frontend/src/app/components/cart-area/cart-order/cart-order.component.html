@@ -1,5 +1,5 @@
 <div class="order">
-    <div>
+    <div class="order-table">
         <div class="header">
             <h4>Your shopping cart</h4>
             <form class="form-inline my-2 my-lg-0">
@@ -40,29 +40,52 @@
     <div class="divCheckout">
         <form (submit)="addOrder()" #formInfo="ngForm">
             <h5>Shipping Details</h5>
-            <label>City</label>
-            <input  type="text" name="city" [(ngModel)]="order.city" required #cityInfo="ngModel" minlength="2">
+            <div class="form-group">
+
+                <label for="city">City</label>
+                <input class="form-control" id="city" type="text" name="city" [(ngModel)]="order.city" required
+                    #cityInfo="ngModel" minlength="2" maxlength="50">
+            </div>
+
             <span *ngIf="cityInfo.errors?.required && cityInfo.touched">Please enter city</span>
-            <span *ngIf="cityInfo.errors?.minlength && cityInfo.touched">city minimum 2 characters</span>
+            <span *ngIf="cityInfo.errors?.minlength && cityInfo.touched">city should be at least 2
+                letters</span>
+            <span *ngIf="cityInfo.errors?.maxlength && cityInfo.touched">city should be at most 50
+                letters</span>
 
-            <label>street</label>
-            <input  #streetBox="ngModel" type="text" name="street" [(ngModel)]="order.street" #streetInfo="ngModel"
-                required minlength="2">
+            <div class="form-group">
+
+                <label for="street">street</label>
+                <input class="form-control" id="street" #streetBox="ngModel" type="text" name="street"
+                    [(ngModel)]="order.street" #streetInfo="ngModel" required minlength="2" maxlength="50">
+            </div>
             <span *ngIf="streetInfo.errors?.required && streetInfo.touched">Please enter street</span>
-            <span *ngIf="streetInfo.errors?.minlength && streetInfo.touched">street minimum 2 characters</span>
+            <span *ngIf="streetInfo.errors?.minlength && streetInfo.touched">street should be at least 2
+                letters</span>
+            <span *ngIf="streetInfo.errors?.maxlength && streetInfo.touched">street should be at most 50
+                letters</span>
 
-            <label>Delivery Date</label>
-            <input  type="date" name="date" [(ngModel)]="order.deliveryDate" #deliveryDateInfo="ngModel" required
-                min={{today}}>
-            <span *ngIf="deliveryDateInfo.errors?.required && deliveryDateInfo.touched">Please enter delivery date</span>
+            <div class="form-group">
+
+                <label>Delivery Date</label>
+                <input class="form-control" type="date" name="date" [(ngModel)]="order.deliveryDate"
+                    #deliveryDateInfo="ngModel" required min={{today}}>
+            </div>
+            <span *ngIf="deliveryDateInfo.errors?.required && deliveryDateInfo.touched">Please enter delivery
+                date</span>
             <span id="alert"></span>
 
             <h5>Payment Details</h5>
-            <label>Credit card</label>
-            <input  type="text" name="creditCard" [(ngModel)]="order.creditCard" #creditCardInfo="ngModel" required>
+            <div class="form-group">
+
+                <label>Credit card</label>
+                <input class="form-control" type="text" name="creditCard" [(ngModel)]="order.creditCard"
+                    #creditCardInfo="ngModel" pattern="^(?=.*[0-9]).{4}$" required>
+            </div>
             <span *ngIf="creditCardInfo.errors?.required && creditCardInfo.touched">Please enter credit card</span>
-            <span *ngIf="creditCardInfo.errors?.pattern && creditCardInfo.touched">something wrong!</span>
+            <span *ngIf="creditCardInfo.errors?.pattern && creditCardInfo.touched">Credit number should be 4 numbers</span>
         </form>
+        <img src="../../../../assets/images/payment-bg.jpg" alt="">
     </div>
 
     <div class="footer">

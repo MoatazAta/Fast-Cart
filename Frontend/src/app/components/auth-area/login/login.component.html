@@ -5,11 +5,11 @@
 
         <label>Email* </label>
         <input class="form-control" type="text" name="username" required [(ngModel)]="credentials.email" #emailInfo="ngModel"/>
-        <span *ngIf="emailInfo.errors?.required && emailInfo.touched">Missing email</span>
+        <span *ngIf="emailInfo.errors?.required && emailInfo.touched">Please enter an email</span>
 
         <label>Password* </label>
         <input class="form-control" type="password" name="password" required [(ngModel)]="credentials.password" #passwordInfo="ngModel"/>
-        <span *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Missing password</span>
+        <span *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Please enter a password</span>
 
         <button class="btn btn-outline-success" [disabled]="formInfo.form.invalid">Login</button>
         <button routerLink="/register" class="btn btn-link">Register Account</button>

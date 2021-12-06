@@ -15,14 +15,13 @@
     max-width: 1200px;
     margin: auto;
     
-}
+} 
 
 .parallax-content {
-    margin-left: 1em;
     padding: 20px;
     position: absolute;
-    left: 0;
-    top: 50px;
+    left: 2%;
+    top: 10%;
     width: 500px;
     display: grid;
     background-color: rgb(252, 252, 252, .8);
@@ -71,7 +70,3 @@ h5 {
     margin: 0 auto;
     margin-bottom: 2em;
 }
-/* 
-h3, h5 {
-    padding-top: 40px;
-} */

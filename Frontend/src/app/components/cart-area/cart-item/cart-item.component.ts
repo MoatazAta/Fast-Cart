@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemModel } from 'src/app/models/item.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -9,13 +9,11 @@ import { NotifyService } from 'src/app/services/notify.service';
     templateUrl: './cart-item.component.html',
     styleUrls: ['./cart-item.component.css']
 }) 
-export class CartItemComponent implements OnInit {
+export class CartItemComponent {
     @Input()
     public cartItem: ItemModel;
     constructor(private notify: NotifyService, private myCartService: CartService, private myRouter: Router) { }
 
-    ngOnInit(): void {
-    }
 
     public async deleteItem(_id:string) {
         try {

@@ -4,7 +4,7 @@
     </div>
     <div class="mydivouter">
         <span class="quantity">{{ cartItem.quantity }}</span>
-        <img src='http://localhost:3001/api/products/images/{{cartItem.product.imageName}}' alt={{cartItem.product._id}}>
+        <img src='http://localhost:3001/api/products/images/{{cartItem.product.imageName}}'>
         <span>{{ cartItem.product.name }}</span>
         <strong class="price">{{ (cartItem.quantity * cartItem.product.price) | currency:'ILS' }}</strong>
         <button type="button" class="mybuttonoverlap btn btn-danger" (click)="deleteItem(cartItem._id)">x</button>

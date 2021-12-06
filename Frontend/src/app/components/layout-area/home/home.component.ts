@@ -41,7 +41,6 @@ export class HomeComponent implements OnInit {
                     try {
                         this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user?._id);
                         this.latestOrder = await this.myOrderService.getLatestOrderAsync(this.user?._id);
-                        console.log("home-sub:", this.cart?._id);
 
                     } catch (err: any) {
                         if (err.status === 403 || err.status === 401) {
@@ -57,13 +56,11 @@ export class HomeComponent implements OnInit {
                 return;
             }
             if (this.user) {
-                // alert("")
                 this.latestOrder = await this.myOrderService.getLatestOrderAsync(this.user?._id);
                 this.cart = await this.myCartService.getOpenCartByUserIdAsync(this.user?._id);
-                console.log("home-on:", this.cart?._id);
             }
 
-            this.orders = await this.myOrderService.getAllOrdersAsync();
+            // this.orders = await this.myOrderService.getAllOrdersAsync();
             this.products = await this.myProductsService.getAllProductsAsync();
         }
         catch (err: any) {

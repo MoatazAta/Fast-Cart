@@ -31,12 +31,14 @@ router.post("/register", async (request, response) => {
         const errors = await userToAdd.validateSync();
         if (errors) return response.status(400).send(errors.message);
 
+        if(logic.validateIdAsync(userToAdd._id)) return response.status(401).send("Please try another ID.");
+
         const addedUser = await logic.registerAsync(userToAdd);
         addedUser.token = cryptoHelper.getNewToken(addedUser);
 
         response.status(201).json(addedUser)
     }
-    catch (err) {
+    catch (err) {  
         response.status(500).send(err.message);
     }
 });

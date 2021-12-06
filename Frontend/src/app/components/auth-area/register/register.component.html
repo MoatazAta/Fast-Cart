@@ -1,22 +1,31 @@
-<div class="Box">
+<div class="register Box">
     <div class="header">
         <h2>Registration for the Fast-Cart website</h2>
-
     </div>
 
     <form [formGroup]="productForm" (submit)="register()" #formInfo="ngForm">
         <p>Required fields are marked with *</p>
-        <div class="form-row"> 
+        <div class="form-row">
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control" [formControl]="firstNameControl" placeholder="First Name*"
-                    required (change)="changeOccurred()">
-                <span *ngIf="firstNameControl.errors?.required && firstNameControl.touched">Please enter First Name</span>
-                
+                    required minlength="2" maxlength="50" (change)="changeOccurred()">
+                <span *ngIf="firstNameControl.errors?.required && firstNameControl.touched">Please enter First
+                    Name</span>
+                <span *ngIf="firstNameControl.errors?.minlength && firstNameControl.touched">First name should be at
+                    least 2 letters</span>
+                <span *ngIf="firstNameControl.errors?.maxlength && firstNameControl.touched">First name should be at
+                    most 50 letters</span>
+
+
             </div>
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control" [formControl]="lastNameControl" placeholder="Last Name*"
-                    required (change)="changeOccurred()">
+                    minlength="2" maxlength="50" required (change)="changeOccurred()">
                 <span *ngIf="lastNameControl.errors?.required && lastNameControl.touched">Please enter Last Name</span>
+                <span *ngIf="lastNameControl.errors?.minlength && lastNameControl.touched">Last name should be at least
+                    2 letters</span>
+                <span *ngIf="lastNameControl.errors?.maxlength && lastNameControl.touched">Last name should be at most
+                    50 letters</span>
 
             </div>
         </div>
@@ -25,13 +34,15 @@
                 <input type="text" class="form-control" required [formControl]="idControl" (change)="changeOccurred()"
                     placeholder="ID*">
                 <span *ngIf="idControl.errors?.required && idControl.touched">Please enter ID</span>
+                <span *ngIf="idControl.errors?.pattern && idControl.touched">Please enter valid ID</span>
+
 
             </div>
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control" required [formControl]="emailControl"
                     (change)="changeOccurred()" placeholder="Email*">
-                    <span *ngIf="emailControl.errors?.required && emailControl.touched">Please enter email</span>
-                    <span *ngIf="emailControl.errors?.pattern && emailControl.touched">Please enter valid email</span>
+                <span *ngIf="emailControl.errors?.required && emailControl.touched">Please enter email</span>
+                <span *ngIf="emailControl.errors?.pattern && emailControl.touched">Please enter valid email</span>
 
             </div>
         </div>
@@ -39,28 +50,40 @@
             <div class="col-md-6 mb-3">
                 <input type="password" class="form-control" required [formControl]="passwordControl"
                     (change)="changeOccurred()" placeholder="Password*">
-                    <span *ngIf="passwordControl.errors?.required && passwordControl.touched">Please enter password</span>
-                    <span *ngIf="passwordControl.errors?.pattern && passwordControl.touched">Password too short</span>
+                <span *ngIf="passwordControl.errors?.required && passwordControl.touched">Please enter password</span>
+                <span *ngIf="passwordControl.errors?.pattern && passwordControl.touched">password must contain at least
+                    6 letters and numbers.</span>
 
 
             </div>
             <div class="col-md-6 mb-3">
                 <input type="password" class="form-control" required [formControl]="confirmPasswordControl"
                     (change)="changeOccurred()" placeholder="Confirm Password*">
-                    <span *ngIf="firstNameControl.errors?.required && firstNameControl.touched">Please enter password</span>
+                <span *ngIf="confirmPasswordControl.errors?.required && confirmPasswordControl.touched">Please enter
+                    password</span>
 
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-6 mb-3">
-                <input type="text" class="form-control" [formControl]="cityControl" required placeholder="City*">
+                <input type="text" class="form-control" [formControl]="cityControl" required minlength="2"
+                    maxlength="50" placeholder="City*">
                 <span *ngIf="cityControl.errors?.required && cityControl.touched">Please enter city name</span>
+                <span *ngIf="cityControl.errors?.minlength && cityControl.touched">city should be at least 2
+                    letters</span>
+                <span *ngIf="cityControl.errors?.maxlength && cityControl.touched">city should be at most 50
+                    letters</span>
             </div>
 
             <div class="col-md-3 mb-3">
-                <input type="text" class="form-control" [formControl]="streetControl" required placeholder="Street*">
+                <input type="text" class="form-control" [formControl]="streetControl" required minlength="2"
+                    maxlength="50" placeholder="Street*">
                 <span *ngIf="streetControl.errors?.required && streetControl.touched">Please enter street</span>
+                <span *ngIf="streetControl.errors?.minlength && streetControl.touched">street should be at least 2
+                    letters</span>
+                <span *ngIf="streetControl.errors?.maxlength && streetControl.touched">street should be at most 50
+                    letters</span>
             </div>
         </div>
         <span id="alert"></span>

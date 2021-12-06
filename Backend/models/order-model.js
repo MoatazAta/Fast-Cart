@@ -13,16 +13,18 @@ const OrderSchema = mongoose.Schema({
     price: {
         type: Number,
         required: [true, "price required"],
-        min:[0,"price can't be negative"],
+        min: [0, "price can't be negative"],
     },
     city: {
         type: String,
-        minLength: [2, "city must be more than 2 chars"],
+        minLength: [2, "city should be at least 2 letters"],
+        maxLength: [50, "city should be at most 50 letters"],
         required: [true, "city required"]
     },
     street: {
         type: String,
         minLength: [2, "street must be more than 2 chars"],
+        maxLength: [50, "street should be at most 50 letters"],
         required: [true, "street required"]
     },
     deliveryDate: {

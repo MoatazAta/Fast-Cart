@@ -1,16 +1,21 @@
 form {
 	width: 350px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 span {
-    display: flex;
+    /* display: flex; */
+    width: 100%;
     color: #bf2717;
+    margin-bottom: 1em;
 }
 input {
     width: 100%; 
     box-sizing: border-box;
-    margin: 0 0 25px 0;
+    margin: 0 0 20px 0;
 } 
 label {
     text-align: left;

@@ -69,7 +69,6 @@ export class CartOrderComponent implements OnInit {
     public generateReceptionPdf() {
         let element = document.getElementById("table");
         html2canvas(element).then((canvas) => {
-            console.log(canvas);
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF('p', 'mm', 'a4');
             const imgHeight = canvas.height * 208 / canvas.width;

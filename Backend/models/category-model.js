@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const CategorySchema = mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: [true, "category name is required"],
+    },
 }, {
     versionKey: false,
     toJSON: { virtuals: true },

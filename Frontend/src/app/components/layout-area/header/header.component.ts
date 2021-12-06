@@ -14,8 +14,6 @@ export class HeaderComponent {
  public user: UserModel;
     public unsubscribeMe: Unsubscribe;
 
-    constructor() { }
-
     ngOnInit(): void {
         store.subscribe(() => {
             this.user = store.getState().authState.user;

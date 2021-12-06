@@ -1,7 +1,7 @@
 const OrderModel = require("../models/order-model");
 
 function getAllOrdersAsync() {
-    return OrderModel.find().populate("user cart").exec();
+    return OrderModel.find().exec();
 }
 
 function getLatestOrderAsync(userId) {

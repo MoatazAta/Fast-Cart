@@ -3,8 +3,11 @@ const UserModel = require("../models/user-model");
 
 
 function validateIdAsync(id) {
-    return UserModel.findOne({ id }).exec();
-}
+    console.log(id);
+    const user = UserModel.find({ id }).exec();
+    if(!user) return true;
+    return false;
+} 
 
 function registerAsync(user) {
     user.password = cryptoHelper.hash(user.password);

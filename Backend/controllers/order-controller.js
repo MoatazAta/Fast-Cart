@@ -7,7 +7,11 @@ const router = express.Router();
 
 router.get("/", async (request, response) => {
     try {
+
+        console.log("orders");
+
         const orders = await logic.getAllOrdersAsync();
+        console.log(orders.length);
         response.json(orders);
     }
     catch (err) {

@@ -24,7 +24,7 @@ export class ProductListComponent implements OnInit {
     public user: UserModel;
     public cart: CartModel;
     public items: ItemModel[];
-
+    
     constructor(private myProductsService: ProductsService, private myRouter: Router, private notify: NotifyService, private myCartService: CartService) { }
 
     async ngOnInit() {
@@ -39,7 +39,7 @@ export class ProductListComponent implements OnInit {
             }
             this.products = await this.myProductsService.getAllProductsAsync();
         }
-
+ 
         catch (err: any) {
             if (err.status === 403 || err.status === 401) {
                 this.myRouter.navigateByUrl("/logout");

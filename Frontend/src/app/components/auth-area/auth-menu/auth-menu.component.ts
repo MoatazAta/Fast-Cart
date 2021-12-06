@@ -13,10 +13,9 @@ export class AuthMenuComponent implements OnInit {
     public user: UserModel;
     public unsubscribeMe: Unsubscribe;
 
-    constructor() { }
 
     ngOnInit(): void {
-        store.subscribe(() => {
+        this.unsubscribeMe = store.subscribe(() => {
             this.user = store.getState().authState.user;
         });
     }

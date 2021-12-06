@@ -3,17 +3,21 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgb(10, 100, 10);
+    background-color: rgb(40, 122, 40);
     color: white;
     height: 80px;
   } 
 img {
-    width: 100px;
-    height: 80%;
+    width: 120px;
+    height: 100%;
     margin-top: 5px;
     float: left;
 }
 
+.footer>p {
+    font-size: large;
+    margin-top: 1.5em;
+} 
 h2 {
     float: left;
     margin-top: 0.5em;

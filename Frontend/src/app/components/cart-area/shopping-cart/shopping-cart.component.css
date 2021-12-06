@@ -1,11 +1,17 @@
 #collapseOne{
     overflow-y: scroll !important;
-    max-height: 700px !important;
+    max-height: 700px !important; 
 }
 
 .rotated {
     transform: rotate(180deg);
   }
+.card-header :active .bi-chevron-down{
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+}
+
 #checkout {
     float:right;
 }
@@ -16,4 +22,8 @@
 
 .header-details{
     float: left;
+} 
+
+.card {
+    min-width: 360px;
 }

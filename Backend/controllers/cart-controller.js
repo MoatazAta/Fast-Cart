@@ -5,7 +5,9 @@ const verifyLoggedIn = require("../middleware/verify-logged-in");
 
 const router = express.Router();
 
-router.get("/carts", verifyLoggedIn, async (request, response) => {
+router.use(verifyLoggedIn);
+
+router.get("/carts", async (request, response) => {
     try {
         const carts = await logic.getAllCartsAsync();
         response.json(carts);
@@ -15,7 +17,7 @@ router.get("/carts", verifyLoggedIn, async (request, response) => {
     }
 });
 
-router.get("/carts/:userId", verifyLoggedIn, async (request, response) => {
+router.get("/carts/:userId", async (request, response) => {
     try {
         const _id = request.params.userId;
         const openCart = await logic.getOpenCartByUserIdAsync(_id, false);
@@ -26,7 +28,7 @@ router.get("/carts/:userId", verifyLoggedIn, async (request, response) => {
     }
 });
 
-router.get("/carts/last-cart/:userId", verifyLoggedIn, async (request, response) => {
+router.get("/carts/last-cart/:userId", async (request, response) => {
     try {
         const _id = request.params.userId;
         const latestCart = await logic.getLatestCartAsync(_id);
@@ -37,7 +39,7 @@ router.get("/carts/last-cart/:userId", verifyLoggedIn, async (request, response)
     }
 });
 
-router.post("/carts", verifyLoggedIn, async (request, response) => {
+router.post("/carts", async (request, response) => {
     try {     
         const cart = new CartModel(request.body);
         const addedCart = await logic.addCartAsync(cart);
@@ -48,7 +50,7 @@ router.post("/carts", verifyLoggedIn, async (request, response) => {
     }
 });
 
-router.patch("/carts/:_id", verifyLoggedIn, async (request, response) => {
+router.patch("/carts/:_id", async (request, response) => {
     try {
         const _id = request.params._id;
         request.body._id = _id;

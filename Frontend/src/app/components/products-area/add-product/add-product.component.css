@@ -1,12 +1,17 @@
 form {
-    width: 350px;
+    width:350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 input,
 select {
     width: 100%;
     box-sizing: border-box;
-}
+}  
+
 label {
     margin-top: 50px;
     position: relative;
@@ -21,6 +26,9 @@ button {
 span {
     color: rgb(155, 12, 12);
     float: left;
+    font-weight: bold;
+    width: 100%;
+
 }
 
 h2 {
